@@ -1,0 +1,16 @@
+Analysis & Synthesis Status : Successful - Fri Feb 18 17:31:31 2022
+Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+Revision Name : NuttyNios
+Top-level Entity Name : NuttyNios
+Family : MAX 10
+Total logic elements : 2,331
+    Total combinational functions : 2,079
+    Dedicated logic registers : 1,251
+Total registers : 1251
+Total pins : 185
+Total virtual pins : 0
+Total memory bits : 535,552
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
+UFM blocks : 0
+ADC blocks : 0
