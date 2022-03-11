@@ -1,0 +1,211 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate C:\Users\meder\NuttyNios-Hardware\DE10_LITE_Qsys.qsys --block-symbol-file --output-directory=C:\Users\meder\NuttyNios-Hardware\DE10_LITE_Qsys --family="MAX 10" --part=10M50DAF484C6GES
+Progress: Loading NuttyNios-Hardware/DE10_LITE_Qsys.qsys
+Progress: Reading input file
+Progress: Adding accelerometer_spi [altera_up_avalon_accelerometer_spi 18.0]
+Progress: Parameterizing module accelerometer_spi
+Progress: Adding altpll_0 [altpll 18.0]
+Progress: Parameterizing module altpll_0
+Progress: Adding buttons [altera_avalon_pio 18.0]
+Progress: Parameterizing module buttons
+Progress: Adding clk_50 [clock_source 18.0]
+Progress: Parameterizing module clk_50
+Progress: Adding cpu [altera_nios2_gen2 18.0]
+Progress: Parameterizing module cpu
+Progress: Adding hex0 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex0
+Progress: Adding hex1 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex1
+Progress: Adding hex2 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex2
+Progress: Adding hex3 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex3
+Progress: Adding hex4 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex4
+Progress: Adding hex5 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex5
+Progress: Adding jtag_uart [altera_avalon_jtag_uart 18.0]
+Progress: Parameterizing module jtag_uart
+Progress: Adding led [altera_avalon_pio 18.0]
+Progress: Parameterizing module led
+Progress: Adding onchip_mem [altera_avalon_onchip_memory2 18.0]
+Progress: Parameterizing module onchip_mem
+Progress: Adding sdram [altera_avalon_new_sdram_controller 18.0]
+Progress: Parameterizing module sdram
+Progress: Adding switches [altera_avalon_pio 18.0]
+Progress: Parameterizing module switches
+Progress: Adding sysid_qsys_0 [altera_avalon_sysid_qsys 18.0]
+Progress: Parameterizing module sysid_qsys_0
+Progress: Adding timer [altera_avalon_timer 18.0]
+Progress: Parameterizing module timer
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: DE10_LITE_Qsys.buttons: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: DE10_LITE_Qsys.jtag_uart: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
+Info: DE10_LITE_Qsys.sdram: SDRAM Controller will only be supported in Quartus Prime Standard Edition in the future release.
+Info: DE10_LITE_Qsys.switches: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: DE10_LITE_Qsys.sysid_qsys_0: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+Info: DE10_LITE_Qsys.sysid_qsys_0: Time stamp will be automatically updated when this component is generated.
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate C:\Users\meder\NuttyNios-Hardware\DE10_LITE_Qsys.qsys --synthesis=VERILOG --output-directory=C:\Users\meder\NuttyNios-Hardware\DE10_LITE_Qsys\synthesis --family="MAX 10" --part=10M50DAF484C6GES
+Progress: Loading NuttyNios-Hardware/DE10_LITE_Qsys.qsys
+Progress: Reading input file
+Progress: Adding accelerometer_spi [altera_up_avalon_accelerometer_spi 18.0]
+Progress: Parameterizing module accelerometer_spi
+Progress: Adding altpll_0 [altpll 18.0]
+Progress: Parameterizing module altpll_0
+Progress: Adding buttons [altera_avalon_pio 18.0]
+Progress: Parameterizing module buttons
+Progress: Adding clk_50 [clock_source 18.0]
+Progress: Parameterizing module clk_50
+Progress: Adding cpu [altera_nios2_gen2 18.0]
+Progress: Parameterizing module cpu
+Progress: Adding hex0 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex0
+Progress: Adding hex1 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex1
+Progress: Adding hex2 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex2
+Progress: Adding hex3 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex3
+Progress: Adding hex4 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex4
+Progress: Adding hex5 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex5
+Progress: Adding jtag_uart [altera_avalon_jtag_uart 18.0]
+Progress: Parameterizing module jtag_uart
+Progress: Adding led [altera_avalon_pio 18.0]
+Progress: Parameterizing module led
+Progress: Adding onchip_mem [altera_avalon_onchip_memory2 18.0]
+Progress: Parameterizing module onchip_mem
+Progress: Adding sdram [altera_avalon_new_sdram_controller 18.0]
+Progress: Parameterizing module sdram
+Progress: Adding switches [altera_avalon_pio 18.0]
+Progress: Parameterizing module switches
+Progress: Adding sysid_qsys_0 [altera_avalon_sysid_qsys 18.0]
+Progress: Parameterizing module sysid_qsys_0
+Progress: Adding timer [altera_avalon_timer 18.0]
+Progress: Parameterizing module timer
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: DE10_LITE_Qsys.buttons: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: DE10_LITE_Qsys.jtag_uart: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
+Info: DE10_LITE_Qsys.sdram: SDRAM Controller will only be supported in Quartus Prime Standard Edition in the future release.
+Info: DE10_LITE_Qsys.switches: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: DE10_LITE_Qsys.sysid_qsys_0: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+Info: DE10_LITE_Qsys.sysid_qsys_0: Time stamp will be automatically updated when this component is generated.
+Info: DE10_LITE_Qsys: Generating DE10_LITE_Qsys "DE10_LITE_Qsys" for QUARTUS_SYNTH
+Info: Inserting clock-crossing logic between cmd_demux.src4 and cmd_mux_004.sink0
+Info: Inserting clock-crossing logic between rsp_demux_004.src0 and rsp_mux.sink4
+Info: accelerometer_spi: Starting Generation of the Accelerometer Controller in SPI mode
+Info: accelerometer_spi: "DE10_LITE_Qsys" instantiated altera_up_avalon_accelerometer_spi "accelerometer_spi"
+Info: altpll_0: "DE10_LITE_Qsys" instantiated altpll "altpll_0"
+Info: buttons: Starting RTL generation for module 'DE10_LITE_Qsys_buttons'
+Info: buttons:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=DE10_LITE_Qsys_buttons --dir=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0005_buttons_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0005_buttons_gen//DE10_LITE_Qsys_buttons_component_configuration.pl  --do_build_sim=0  ]
+Info: buttons: Done RTL generation for module 'DE10_LITE_Qsys_buttons'
+Info: buttons: "DE10_LITE_Qsys" instantiated altera_avalon_pio "buttons"
+Info: cpu: "DE10_LITE_Qsys" instantiated altera_nios2_gen2 "cpu"
+Info: hex0: Starting RTL generation for module 'DE10_LITE_Qsys_hex0'
+Info: hex0:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=DE10_LITE_Qsys_hex0 --dir=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0006_hex0_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0006_hex0_gen//DE10_LITE_Qsys_hex0_component_configuration.pl  --do_build_sim=0  ]
+Info: hex0: Done RTL generation for module 'DE10_LITE_Qsys_hex0'
+Info: hex0: "DE10_LITE_Qsys" instantiated altera_avalon_pio "hex0"
+Info: jtag_uart: Starting RTL generation for module 'DE10_LITE_Qsys_jtag_uart'
+Info: jtag_uart:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=DE10_LITE_Qsys_jtag_uart --dir=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0007_jtag_uart_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0007_jtag_uart_gen//DE10_LITE_Qsys_jtag_uart_component_configuration.pl  --do_build_sim=0  ]
+Info: jtag_uart: Done RTL generation for module 'DE10_LITE_Qsys_jtag_uart'
+Info: jtag_uart: "DE10_LITE_Qsys" instantiated altera_avalon_jtag_uart "jtag_uart"
+Info: led: Starting RTL generation for module 'DE10_LITE_Qsys_led'
+Info: led:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=DE10_LITE_Qsys_led --dir=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0008_led_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0008_led_gen//DE10_LITE_Qsys_led_component_configuration.pl  --do_build_sim=0  ]
+Info: led: Done RTL generation for module 'DE10_LITE_Qsys_led'
+Info: led: "DE10_LITE_Qsys" instantiated altera_avalon_pio "led"
+Info: sdram: Starting RTL generation for module 'DE10_LITE_Qsys_sdram'
+Info: sdram:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller/generate_rtl.pl --name=DE10_LITE_Qsys_sdram --dir=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0009_sdram_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0009_sdram_gen//DE10_LITE_Qsys_sdram_component_configuration.pl  --do_build_sim=0  ]
+Info: sdram: Done RTL generation for module 'DE10_LITE_Qsys_sdram'
+Info: sdram: "DE10_LITE_Qsys" instantiated altera_avalon_new_sdram_controller "sdram"
+Info: switches: Starting RTL generation for module 'DE10_LITE_Qsys_switches'
+Info: switches:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=DE10_LITE_Qsys_switches --dir=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0010_switches_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0010_switches_gen//DE10_LITE_Qsys_switches_component_configuration.pl  --do_build_sim=0  ]
+Info: switches: Done RTL generation for module 'DE10_LITE_Qsys_switches'
+Info: switches: "DE10_LITE_Qsys" instantiated altera_avalon_pio "switches"
+Info: sysid_qsys_0: "DE10_LITE_Qsys" instantiated altera_avalon_sysid_qsys "sysid_qsys_0"
+Info: timer: Starting RTL generation for module 'DE10_LITE_Qsys_timer'
+Info: timer:   Generation command is [exec C:/intelFPGA_lite/18.0/quartus/bin64//perl/bin/perl.exe -I C:/intelFPGA_lite/18.0/quartus/bin64//perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_timer/generate_rtl.pl --name=DE10_LITE_Qsys_timer --dir=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0012_timer_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0012_timer_gen//DE10_LITE_Qsys_timer_component_configuration.pl  --do_build_sim=0  ]
+Info: timer: Done RTL generation for module 'DE10_LITE_Qsys_timer'
+Info: timer: "DE10_LITE_Qsys" instantiated altera_avalon_timer "timer"
+Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_001: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_002: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_003: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_004: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_005: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_006: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_007: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_008: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_009: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_010: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_011: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_012: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_013: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_014: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_015: Inserting error_adapter: error_adapter_0
+Info: mm_interconnect_0: "DE10_LITE_Qsys" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: irq_mapper: "DE10_LITE_Qsys" instantiated altera_irq_mapper "irq_mapper"
+Info: rst_controller: "DE10_LITE_Qsys" instantiated altera_reset_controller "rst_controller"
+Info: cpu: Starting RTL generation for module 'DE10_LITE_Qsys_cpu_cpu'
+Info: cpu:   Generation command is [exec C:/intelFPGA_lite/18.0/quartus/bin64//eperlcmd.exe -I C:/intelFPGA_lite/18.0/quartus/bin64//perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I C:/intelfpga_lite/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I C:/intelfpga_lite/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I C:/intelfpga_lite/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- C:/intelfpga_lite/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.epl --name=DE10_LITE_Qsys_cpu_cpu --dir=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0015_cpu_gen/ --quartus_bindir=C:/intelFPGA_lite/18.0/quartus/bin64/ --verilog --config=C:/Users/meder/AppData/Local/Temp/alt9048_3635015967980504824.dir/0015_cpu_gen//DE10_LITE_Qsys_cpu_cpu_processor_configuration.pl  --do_build_sim=0  ]
+Info: cpu: # 2022.02.25 12:38:21 (*) Starting Nios II generation
+Info: cpu: # 2022.02.25 12:38:21 (*)   Checking for plaintext license.
+Info: cpu: # 2022.02.25 12:38:22 (*)   Couldn't query license setup in Quartus directory C:/intelFPGA_lite/18.0/quartus/bin64/
+Info: cpu: # 2022.02.25 12:38:22 (*)   Defaulting to contents of LM_LICENSE_FILE environment variable
+Info: cpu: # 2022.02.25 12:38:22 (*)   LM_LICENSE_FILE environment variable is empty
+Info: cpu: # 2022.02.25 12:38:22 (*)   Plaintext license not found.
+Info: cpu: # 2022.02.25 12:38:22 (*)   No license required to generate encrypted Nios II/e.
+Info: cpu: # 2022.02.25 12:38:22 (*)   Elaborating CPU configuration settings
+Info: cpu: # 2022.02.25 12:38:22 (*)   Creating all objects for CPU
+Info: cpu: # 2022.02.25 12:38:23 (*)   Generating RTL from CPU objects
+Info: cpu: # 2022.02.25 12:38:23 (*)   Creating plain-text RTL
+Info: cpu: # 2022.02.25 12:38:23 (*) Done Nios II generation
+Info: cpu: Done RTL generation for module 'DE10_LITE_Qsys_cpu_cpu'
+Info: cpu: "cpu" instantiated altera_nios2_gen2_unit "cpu"
+Info: cpu_data_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "cpu_data_master_translator"
+Info: accelerometer_spi_avalon_accelerometer_spi_mode_slave_translator: "mm_interconnect_0" instantiated altera_merlin_slave_translator "accelerometer_spi_avalon_accelerometer_spi_mode_slave_translator"
+Info: cpu_data_master_agent: "mm_interconnect_0" instantiated altera_merlin_master_agent "cpu_data_master_agent"
+Info: accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent: "mm_interconnect_0" instantiated altera_merlin_slave_agent "accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent"
+Info: accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_rsp_fifo: "mm_interconnect_0" instantiated altera_avalon_sc_fifo "accelerometer_spi_avalon_accelerometer_spi_mode_slave_agent_rsp_fifo"
+Info: router: "mm_interconnect_0" instantiated altera_merlin_router "router"
+Info: router_001: "mm_interconnect_0" instantiated altera_merlin_router "router_001"
+Info: router_002: "mm_interconnect_0" instantiated altera_merlin_router "router_002"
+Info: router_003: "mm_interconnect_0" instantiated altera_merlin_router "router_003"
+Info: router_005: "mm_interconnect_0" instantiated altera_merlin_router "router_005"
+Info: router_008: "mm_interconnect_0" instantiated altera_merlin_router "router_008"
+Info: accelerometer_spi_avalon_accelerometer_spi_mode_slave_burst_adapter: "mm_interconnect_0" instantiated altera_merlin_burst_adapter "accelerometer_spi_avalon_accelerometer_spi_mode_slave_burst_adapter"
+Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: cmd_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux_001"
+Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: cmd_mux_003: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux_003"
+Info: Reusing file C:/Users/meder/NuttyNios-Hardware/DE10_LITE_Qsys/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
+Info: rsp_demux_004: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux_004"
+Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: Reusing file C:/Users/meder/NuttyNios-Hardware/DE10_LITE_Qsys/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux_001"
+Info: Reusing file C:/Users/meder/NuttyNios-Hardware/DE10_LITE_Qsys/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: accelerometer_spi_avalon_accelerometer_spi_mode_slave_rsp_width_adapter: "mm_interconnect_0" instantiated altera_merlin_width_adapter "accelerometer_spi_avalon_accelerometer_spi_mode_slave_rsp_width_adapter"
+Info: Reusing file C:/Users/meder/NuttyNios-Hardware/DE10_LITE_Qsys/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: Reusing file C:/Users/meder/NuttyNios-Hardware/DE10_LITE_Qsys/synthesis/submodules/altera_merlin_burst_uncompressor.sv
+Info: crosser: "mm_interconnect_0" instantiated altera_avalon_st_handshake_clock_crosser "crosser"
+Info: Reusing file C:/Users/meder/NuttyNios-Hardware/DE10_LITE_Qsys/synthesis/submodules/altera_avalon_st_pipeline_base.v
+Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: avalon_st_adapter_001: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter_001"
+Info: avalon_st_adapter_006: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter_006"
+Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
+Info: error_adapter_0: "avalon_st_adapter_001" instantiated error_adapter "error_adapter_0"
+Info: error_adapter_0: "avalon_st_adapter_006" instantiated error_adapter "error_adapter_0"
+Info: DE10_LITE_Qsys: Done "DE10_LITE_Qsys" with 44 modules, 73 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

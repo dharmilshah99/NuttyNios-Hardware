@@ -1,0 +1,18 @@
+Fitter Status : Successful - Fri Feb 25 13:08:58 2022
+Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+Revision Name : sdram
+Top-level Entity Name : DE10_LITE_SDRAM_Nios_Test
+Family : MAX 10
+Device : 10M50DAF484C6GES
+Timing Models : Preliminary
+Total logic elements : 3,177 / 49,760 ( 6 % )
+    Total combinational functions : 2,841 / 49,760 ( 6 % )
+    Dedicated logic registers : 1,959 / 49,760 ( 4 % )
+Total registers : 2028
+Total pins : 187 / 360 ( 52 % )
+Total virtual pins : 0
+Total memory bits : 11,264 / 1,677,312 ( < 1 % )
+Embedded Multiplier 9-bit elements : 0 / 288 ( 0 % )
+Total PLLs : 1 / 4 ( 25 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0 / 2 ( 0 % )
