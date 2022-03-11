@@ -2,6 +2,7 @@
 #include "altera_up_avalon_accelerometer_spi.h"
 #include "altera_avalon_pio_regs.h"
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include "utils.h"
 
@@ -57,6 +58,23 @@
 //
 //}
 
+void setBuffer(unsigned char* word, unsigned char buffer[40]){
+	memset(buffer, 255, 40);
+	memcpy(buffer, word, strlen(word));
+}
+
+void shiftBuffer(unsigned char buffer[40]){
+	int tmp = buffer[0];
+	for(int i = 1; i < 40; i++){
+		buffer[i-1] = buffer[i];
+	}
+	buffer[39] = tmp;
+}
+
+void getWindow(unsigned char window[6], unsigned char buffer[40]){
+	memcpy(window, buffer, 6);
+}
+
 
 int main() {
 
@@ -71,7 +89,6 @@ int main() {
 	acc_dev = alt_up_accelerometer_spi_open_dev("/dev/accelerometer_spi");
 
 //	FILE* file = fopen("/dev/stdin", "r");
-	int i;
 
 
 
@@ -79,8 +96,29 @@ int main() {
         return 1;
     }
 
+    // k, m, v, w, x, z - are not in the table
+    unsigned char word[40] = "hello you lost 123456789ABCDEF";
 
-    // infinite polling loop
+    unsigned char display_buff[40];
+    unsigned char window[6];
+
+    setBuffer(word, display_buff);
+    int i = 100000;
+    while(1){
+    	if(i == 0){
+			getWindow(window, display_buff);
+			for(int i = 0; i < 6; i++){
+				window[i] = decode_7seg(window[i]);
+			}
+			write_hex(window);
+			shiftBuffer(display_buff);
+			i = 100000;
+    	}
+    	i--;
+    }
+
+
+	// infinite polling loop
     while (1) {
 //    	letter = alt_getchar();
 //    	bool = (letter == '1') ? 1 : 0;
@@ -91,7 +129,7 @@ int main() {
     	//scanf ("%x",&i);
     	//alt_printf("%x", i);
 
-		alt_printf("%x,%x,%x,%x,%x\n", coords[0], coords[1], coords[2], buttons, switches);
+//		alt_printf("%x,%x,%x,%x,%x\n", coords[0], coords[1], coords[2], buttons, switches);
 
 //		if(bool){
 //			write_leds(0b1111111111);
@@ -100,7 +138,6 @@ int main() {
 //		}
 
     	// write_leds(leds);
-        // write_hex(hex);
     }
 
     return 0;
