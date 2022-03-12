@@ -1,10 +1,34 @@
 #include "system.h"
 #include "altera_up_avalon_accelerometer_spi.h"
 #include "altera_avalon_pio_regs.h"
+
+#include "alt_types.h"
+#include "sys/alt_irq.h"
+#include "altera_avalon_jtag_uart.h"
+#include "io.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "utils.h"
+
+#define END_RECIEVE '>'
+
+void uart_recieve(unsigned char* buffer){
+	FILE* fp;
+	int i = 0;
+	char c = 0;
+	fp = fopen("/dev/jtag_uart", "r");
+	if(fp){
+		while(c != '>'){
+			c = getc(fp);
+			buffer[i] = c;
+			i++;
+		}
+		fclose(fp);
+		alt_printf("[DEBUG] CLOSED FP\n");
+	}
+}
 
 //#define OFFSET -32
 //#define PWM_PERIOD 16
@@ -76,60 +100,75 @@ void getWindow(unsigned char window[6], unsigned char buffer[40]){
 }
 
 
+char state = 0;
+void getState(){
+	state = getchar();
+}
+
+
+
 int main() {
 
-//	int bool = 0;
 	int buttons, switches;
-//	int leds;
-//	int hex[6];
-	char letter;
-    alt_32 coords[3]; // contains x, y, z data
 
+    alt_32 coords[3]; // contains x, y, z data
 	alt_up_accelerometer_spi_dev *acc_dev;
 	acc_dev = alt_up_accelerometer_spi_open_dev("/dev/accelerometer_spi");
 
-//	FILE* file = fopen("/dev/stdin", "r");
-
-
-
     if (acc_dev == NULL) { // if return 1, check if the spi ip name is "accelerometer_spi"
-        return 1;
+    	alt_printf("[ERROR] ACCELEROMETER MISSING\n");
+    	return 1;
     }
 
-    // k, m, v, w, x, z - are not in the table
-    unsigned char word[40] = "hello you lost 123456789ABCDEF";
+    unsigned char word[40];
+	uart_recieve(word);
+	alt_printf("Putting \"%s\" onto HEX panel.\n", word);
 
+    // k, m, v, w, x, z - are not in HEX table
+	int delay = 0;
     unsigned char display_buff[40];
     unsigned char window[6];
 
     setBuffer(word, display_buff);
-    int i = 100000;
-    while(1){
-    	if(i == 0){
-			getWindow(window, display_buff);
-			for(int i = 0; i < 6; i++){
-				window[i] = decode_7seg(window[i]);
-			}
-			write_hex(window);
-			shiftBuffer(display_buff);
-			i = 100000;
-    	}
-    	i--;
-    }
+
 
 
 	// infinite polling loop
     while (1) {
-//    	letter = alt_getchar();
-//    	bool = (letter == '1') ? 1 : 0;
+
+    	// button & switch input
     	buttons = read_buttons();
     	switches = read_switches();
+
+    	// accelerometer
     	read_accerometer(acc_dev, coords);
+		alt_printf("%x,%x,%x,%x,%x\n", coords[0], coords[1], coords[2], buttons, switches);
 
-    	//scanf ("%x",&i);
-    	//alt_printf("%x", i);
+		// update Window
+//		char debug_display[41];
+//		char debug_window[7];
+//		memcpy(debug_display, display_buff, 40);
+//		memcpy(debug_window, window, 6);
+//		debug_display[40] = '\0';
+//		debug_window[6] = '\0';
 
-//		alt_printf("%x,%x,%x,%x,%x\n", coords[0], coords[1], coords[2], buttons, switches);
+//		alt_printf("%s\n", debug_display);
+//		alt_printf("%s\n", debug_window);
+
+		if(delay == 0){
+			getWindow(window, display_buff);
+			for(int j = 0; j < 6; j++){
+				window[j] = decode_7seg(window[j]);
+			}
+			write_hex(window);
+			shiftBuffer(display_buff);
+			delay = 10;
+		}
+		delay--;
+
+		// state
+		getState();
+		alt_printf("State: %c\n", state);
 
 //		if(bool){
 //			write_leds(0b1111111111);
