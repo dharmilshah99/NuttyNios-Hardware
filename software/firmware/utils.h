@@ -82,5 +82,21 @@ unsigned char decode_7seg(unsigned char chr)
 	return ~seven_seg_digits_decode_gfedcba[chr - '0'];
 }
 
+void setBuffer(unsigned char* word, unsigned char buffer[40]){
+	memset(buffer, 255, 40);
+	memcpy(buffer, word, strlen(word));
+}
+
+void shiftBuffer(unsigned char buffer[40]){
+	int tmp = buffer[0];
+	for(int i = 1; i < 40; i++){
+		buffer[i-1] = buffer[i];
+	}
+	buffer[39] = tmp;
+}
+
+void getWindow(unsigned char window[6], unsigned char buffer[40]){
+	memcpy(window, buffer, 6);
+}
 
 #endif /* UTILS_H_ */

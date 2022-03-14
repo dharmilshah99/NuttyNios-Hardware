@@ -103,16 +103,22 @@ module nios2system (
 	wire  [31:0] mm_interconnect_0_hex5_s1_writedata;                                                 // mm_interconnect_0:hex5_s1_writedata -> hex5:writedata
 	wire  [31:0] mm_interconnect_0_button_s1_readdata;                                                // button:readdata -> mm_interconnect_0:button_s1_readdata
 	wire   [1:0] mm_interconnect_0_button_s1_address;                                                 // mm_interconnect_0:button_s1_address -> button:address
-	wire         mm_interconnect_0_timer_s1_chipselect;                                               // mm_interconnect_0:timer_s1_chipselect -> timer:chipselect
-	wire  [15:0] mm_interconnect_0_timer_s1_readdata;                                                 // timer:readdata -> mm_interconnect_0:timer_s1_readdata
-	wire   [2:0] mm_interconnect_0_timer_s1_address;                                                  // mm_interconnect_0:timer_s1_address -> timer:address
-	wire         mm_interconnect_0_timer_s1_write;                                                    // mm_interconnect_0:timer_s1_write -> timer:write_n
-	wire  [15:0] mm_interconnect_0_timer_s1_writedata;                                                // mm_interconnect_0:timer_s1_writedata -> timer:writedata
+	wire         mm_interconnect_0_timer0_s1_chipselect;                                              // mm_interconnect_0:timer0_s1_chipselect -> timer0:chipselect
+	wire  [15:0] mm_interconnect_0_timer0_s1_readdata;                                                // timer0:readdata -> mm_interconnect_0:timer0_s1_readdata
+	wire   [2:0] mm_interconnect_0_timer0_s1_address;                                                 // mm_interconnect_0:timer0_s1_address -> timer0:address
+	wire         mm_interconnect_0_timer0_s1_write;                                                   // mm_interconnect_0:timer0_s1_write -> timer0:write_n
+	wire  [15:0] mm_interconnect_0_timer0_s1_writedata;                                               // mm_interconnect_0:timer0_s1_writedata -> timer0:writedata
+	wire         mm_interconnect_0_timer1_s1_chipselect;                                              // mm_interconnect_0:timer1_s1_chipselect -> timer1:chipselect
+	wire  [15:0] mm_interconnect_0_timer1_s1_readdata;                                                // timer1:readdata -> mm_interconnect_0:timer1_s1_readdata
+	wire   [2:0] mm_interconnect_0_timer1_s1_address;                                                 // mm_interconnect_0:timer1_s1_address -> timer1:address
+	wire         mm_interconnect_0_timer1_s1_write;                                                   // mm_interconnect_0:timer1_s1_write -> timer1:write_n
+	wire  [15:0] mm_interconnect_0_timer1_s1_writedata;                                               // mm_interconnect_0:timer1_s1_writedata -> timer1:writedata
 	wire         irq_mapper_receiver0_irq;                                                            // accelerometer_spi:irq -> irq_mapper:receiver0_irq
 	wire         irq_mapper_receiver1_irq;                                                            // jtag_uart:av_irq -> irq_mapper:receiver1_irq
-	wire         irq_mapper_receiver2_irq;                                                            // timer:irq -> irq_mapper:receiver2_irq
+	wire         irq_mapper_receiver2_irq;                                                            // timer0:irq -> irq_mapper:receiver2_irq
+	wire         irq_mapper_receiver3_irq;                                                            // timer1:irq -> irq_mapper:receiver3_irq
 	wire  [31:0] cpu_irq_irq;                                                                         // irq_mapper:sender_irq -> cpu:irq
-	wire         rst_controller_reset_out_reset;                                                      // rst_controller:reset_out -> [accelerometer_spi:reset, button:reset_n, cpu:reset_n, hex0:reset_n, hex1:reset_n, hex2:reset_n, hex3:reset_n, hex4:reset_n, hex5:reset_n, irq_mapper:reset, jtag_uart:rst_n, led:reset_n, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_memory:reset, rst_translator:in_reset, switch:reset_n, sysid_qsys_0:reset_n, timer:reset_n]
+	wire         rst_controller_reset_out_reset;                                                      // rst_controller:reset_out -> [accelerometer_spi:reset, button:reset_n, cpu:reset_n, hex0:reset_n, hex1:reset_n, hex2:reset_n, hex3:reset_n, hex4:reset_n, hex5:reset_n, irq_mapper:reset, jtag_uart:rst_n, led:reset_n, mm_interconnect_0:cpu_reset_reset_bridge_in_reset_reset, onchip_memory:reset, rst_translator:in_reset, switch:reset_n, sysid_qsys_0:reset_n, timer0:reset_n, timer1:reset_n]
 	wire         rst_controller_reset_out_reset_req;                                                  // rst_controller:reset_req -> [cpu:reset_req, onchip_memory:reset_req, rst_translator:reset_req_in]
 
 	nios2system_accelerometer_spi accelerometer_spi (
@@ -288,15 +294,26 @@ module nios2system (
 		.address  (mm_interconnect_0_sysid_qsys_0_control_slave_address)   //              .address
 	);
 
-	nios2system_timer timer (
-		.clk        (clk_clk),                               //   clk.clk
-		.reset_n    (~rst_controller_reset_out_reset),       // reset.reset_n
-		.address    (mm_interconnect_0_timer_s1_address),    //    s1.address
-		.writedata  (mm_interconnect_0_timer_s1_writedata),  //      .writedata
-		.readdata   (mm_interconnect_0_timer_s1_readdata),   //      .readdata
-		.chipselect (mm_interconnect_0_timer_s1_chipselect), //      .chipselect
-		.write_n    (~mm_interconnect_0_timer_s1_write),     //      .write_n
-		.irq        (irq_mapper_receiver2_irq)               //   irq.irq
+	nios2system_timer0 timer0 (
+		.clk        (clk_clk),                                //   clk.clk
+		.reset_n    (~rst_controller_reset_out_reset),        // reset.reset_n
+		.address    (mm_interconnect_0_timer0_s1_address),    //    s1.address
+		.writedata  (mm_interconnect_0_timer0_s1_writedata),  //      .writedata
+		.readdata   (mm_interconnect_0_timer0_s1_readdata),   //      .readdata
+		.chipselect (mm_interconnect_0_timer0_s1_chipselect), //      .chipselect
+		.write_n    (~mm_interconnect_0_timer0_s1_write),     //      .write_n
+		.irq        (irq_mapper_receiver2_irq)                //   irq.irq
+	);
+
+	nios2system_timer1 timer1 (
+		.clk        (clk_clk),                                //   clk.clk
+		.reset_n    (~rst_controller_reset_out_reset),        // reset.reset_n
+		.address    (mm_interconnect_0_timer1_s1_address),    //    s1.address
+		.writedata  (mm_interconnect_0_timer1_s1_writedata),  //      .writedata
+		.readdata   (mm_interconnect_0_timer1_s1_readdata),   //      .readdata
+		.chipselect (mm_interconnect_0_timer1_s1_chipselect), //      .chipselect
+		.write_n    (~mm_interconnect_0_timer1_s1_write),     //      .write_n
+		.irq        (irq_mapper_receiver3_irq)                //   irq.irq
 	);
 
 	nios2system_mm_interconnect_0 mm_interconnect_0 (
@@ -384,11 +401,16 @@ module nios2system (
 		.switch_s1_readdata                                                (mm_interconnect_0_switch_s1_readdata),                                                //                                                      .readdata
 		.sysid_qsys_0_control_slave_address                                (mm_interconnect_0_sysid_qsys_0_control_slave_address),                                //                            sysid_qsys_0_control_slave.address
 		.sysid_qsys_0_control_slave_readdata                               (mm_interconnect_0_sysid_qsys_0_control_slave_readdata),                               //                                                      .readdata
-		.timer_s1_address                                                  (mm_interconnect_0_timer_s1_address),                                                  //                                              timer_s1.address
-		.timer_s1_write                                                    (mm_interconnect_0_timer_s1_write),                                                    //                                                      .write
-		.timer_s1_readdata                                                 (mm_interconnect_0_timer_s1_readdata),                                                 //                                                      .readdata
-		.timer_s1_writedata                                                (mm_interconnect_0_timer_s1_writedata),                                                //                                                      .writedata
-		.timer_s1_chipselect                                               (mm_interconnect_0_timer_s1_chipselect)                                                //                                                      .chipselect
+		.timer0_s1_address                                                 (mm_interconnect_0_timer0_s1_address),                                                 //                                             timer0_s1.address
+		.timer0_s1_write                                                   (mm_interconnect_0_timer0_s1_write),                                                   //                                                      .write
+		.timer0_s1_readdata                                                (mm_interconnect_0_timer0_s1_readdata),                                                //                                                      .readdata
+		.timer0_s1_writedata                                               (mm_interconnect_0_timer0_s1_writedata),                                               //                                                      .writedata
+		.timer0_s1_chipselect                                              (mm_interconnect_0_timer0_s1_chipselect),                                              //                                                      .chipselect
+		.timer1_s1_address                                                 (mm_interconnect_0_timer1_s1_address),                                                 //                                             timer1_s1.address
+		.timer1_s1_write                                                   (mm_interconnect_0_timer1_s1_write),                                                   //                                                      .write
+		.timer1_s1_readdata                                                (mm_interconnect_0_timer1_s1_readdata),                                                //                                                      .readdata
+		.timer1_s1_writedata                                               (mm_interconnect_0_timer1_s1_writedata),                                               //                                                      .writedata
+		.timer1_s1_chipselect                                              (mm_interconnect_0_timer1_s1_chipselect)                                               //                                                      .chipselect
 	);
 
 	nios2system_irq_mapper irq_mapper (
@@ -397,6 +419,7 @@ module nios2system (
 		.receiver0_irq (irq_mapper_receiver0_irq),       // receiver0.irq
 		.receiver1_irq (irq_mapper_receiver1_irq),       // receiver1.irq
 		.receiver2_irq (irq_mapper_receiver2_irq),       // receiver2.irq
+		.receiver3_irq (irq_mapper_receiver3_irq),       // receiver3.irq
 		.sender_irq    (cpu_irq_irq)                     //    sender.irq
 	);
 

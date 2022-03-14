@@ -4,7 +4,7 @@
  * Machine generated for CPU 'cpu' in SOPC Builder design 'nios2system'
  * SOPC Builder design path: ../../nios2system.sopcinfo
  *
- * Generated: Fri Mar 11 16:27:07 GMT 2022
+ * Generated: Mon Mar 14 11:55:12 GMT 2022
  */
 
 /*
@@ -71,7 +71,8 @@
 ALTERA_NIOS2_GEN2_IRQ_INSTANCE ( CPU, cpu);
 ALTERA_AVALON_JTAG_UART_INSTANCE ( JTAG_UART, jtag_uart);
 ALTERA_AVALON_SYSID_QSYS_INSTANCE ( SYSID_QSYS_0, sysid_qsys_0);
-ALTERA_AVALON_TIMER_INSTANCE ( TIMER, timer);
+ALTERA_AVALON_TIMER_INSTANCE ( TIMER0, timer0);
+ALTERA_AVALON_TIMER_INSTANCE ( TIMER1, timer1);
 ALTERA_UP_AVALON_ACCELEROMETER_SPI_INSTANCE ( ACCELEROMETER_SPI, accelerometer_spi);
 
 /*
@@ -95,7 +96,8 @@ void alt_irq_init ( const void* base )
 
 void alt_sys_init( void )
 {
-    ALTERA_AVALON_TIMER_INIT ( TIMER, timer);
+    ALTERA_AVALON_TIMER_INIT ( TIMER0, timer0);
+    ALTERA_AVALON_TIMER_INIT ( TIMER1, timer1);
     ALTERA_AVALON_JTAG_UART_INIT ( JTAG_UART, jtag_uart);
     ALTERA_AVALON_SYSID_QSYS_INIT ( SYSID_QSYS_0, sysid_qsys_0);
     ALTERA_UP_AVALON_ACCELEROMETER_SPI_INIT ( ACCELEROMETER_SPI, accelerometer_spi);

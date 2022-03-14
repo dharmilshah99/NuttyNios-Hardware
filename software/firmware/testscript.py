@@ -16,8 +16,7 @@ def process_data(raw_data):
 	if len(arr) != 5:
 		return
 	arr = [int(x, 16) for x in arr]
-	coords = [twos_comp(x, 32) for x in arr[:3]]
-	coordx = coords[0]
+	coords = [twos_comp(x, 32)/8388608 for x in arr[:3]]
 	return {
 		"axes": coords,
 		"buttons": arr[3],
@@ -26,20 +25,13 @@ def process_data(raw_data):
 
 def reciever():
 	with Popen('C:/intelFPGA_lite/18.0/quartus/bin64/nios2-terminal.exe', shell=True, stdout=PIPE, stdin=PIPE, stderr=STDOUT) as p:
-		
-
-		p.stdin.write(b'helloooooooooooo>')
-		while True:
-			p.stdin.write(b'2')
-
-			for line in p.stdout:
-				print(line)
-			# raw_data = line.decode().strip()
-			# # ignore empty line and starting "nios-terminal: ..." login thing
-			# if raw_data == '' or raw_data[0] == 'n':
-			# 	continue
-			# data = process_data(raw_data)
-			# print(data)
+		for line in p.stdout:
+			raw_data = line.decode().strip()
+			# ignore empty line and starting "nios-terminal: ..." login thing
+			if raw_data == '' or raw_data[0] == 'n':
+				continue
+			data = process_data(raw_data)
+			print(i)
 
 if __name__ == "__main__":
 	reciever()

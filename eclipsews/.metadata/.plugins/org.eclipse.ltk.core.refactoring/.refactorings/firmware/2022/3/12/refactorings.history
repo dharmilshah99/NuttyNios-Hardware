@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;firmware/utils.h&apos; to &apos;io_utils.h&apos;" description="Rename resource &apos;utils.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="utils.h" name="io_utils.h" stamp="1647272396250" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;firmware/io_utils.h&apos; to &apos;utils.h&apos;" description="Rename resource &apos;io_utils.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="io_utils.h" name="utils.h" stamp="1647272415030" updateReferences="true"/>
+</session>
