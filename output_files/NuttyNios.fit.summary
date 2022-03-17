@@ -1,17 +1,17 @@
-Fitter Status : Successful - Mon Mar 14 12:51:03 2022
-Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+Fitter Status : Successful - Thu Mar 17 14:30:16 2022
+Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 Revision Name : NuttyNios
 Top-level Entity Name : NuttyNios
 Family : MAX 10
 Device : 10M50DAF484C7G
 Timing Models : Final
-Total logic elements : 2,607 / 49,760 ( 5 % )
-    Total combinational functions : 2,384 / 49,760 ( 5 % )
-    Dedicated logic registers : 1,533 / 49,760 ( 3 % )
-Total registers : 1533
+Total logic elements : 2,657 / 49,760 ( 5 % )
+    Total combinational functions : 2,438 / 49,760 ( 5 % )
+    Dedicated logic registers : 1,535 / 49,760 ( 3 % )
+Total registers : 1535
 Total pins : 185 / 360 ( 51 % )
 Total virtual pins : 0
-Total memory bits : 535,552 / 1,677,312 ( 32 % )
+Total memory bits : 731,264 / 1,677,312 ( 44 % )
 Embedded Multiplier 9-bit elements : 0 / 288 ( 0 % )
 Total PLLs : 0 / 4 ( 0 % )
 UFM blocks : 0 / 1 ( 0 % )

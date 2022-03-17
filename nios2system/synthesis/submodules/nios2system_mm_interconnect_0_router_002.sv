@@ -1,4 +1,4 @@
-// (C) 2001-2018 Intel Corporation. All rights reserved.
+// (C) 2001-2021 Intel Corporation. All rights reserved.
 // Your use of Intel Corporation's design tools, logic functions and other 
 // software and tools, and its AMPP partner logic functions, and any output 
 // files from any of the foregoing (including device programming or simulation 
@@ -24,9 +24,9 @@
 // agreement for further details.
 
 
-// $Id: //acds/rel/18.0std/ip/merlin/altera_merlin_router/altera_merlin_router.sv.terp#1 $
+// $Id: //acds/rel/21.1std/ip/merlin/altera_merlin_router/altera_merlin_router.sv.terp#1 $
 // $Revision: #1 $
-// $Date: 2018/01/31 $
+// $Date: 2020/06/22 $
 // $Author: psgswbuild $
 
 // -------------------------------------------------------
@@ -49,14 +49,14 @@ module nios2system_mm_interconnect_0_router_002_default_decode
                DEFAULT_RD_CHANNEL = -1,
                DEFAULT_DESTID = 0 
    )
-  (output [55 - 52 : 0] default_destination_id,
+  (output [56 - 53 : 0] default_destination_id,
    output [16-1 : 0] default_wr_channel,
    output [16-1 : 0] default_rd_channel,
    output [16-1 : 0] default_src_channel
   );
 
   assign default_destination_id = 
-    DEFAULT_DESTID[55 - 52 : 0];
+    DEFAULT_DESTID[56 - 53 : 0];
 
   generate
     if (DEFAULT_CHANNEL == -1) begin : no_default_channel_assignment
@@ -93,7 +93,7 @@ module nios2system_mm_interconnect_0_router_002
     // Command Sink (Input)
     // -------------------
     input                       sink_valid,
-    input  [69-1 : 0]    sink_data,
+    input  [70-1 : 0]    sink_data,
     input                       sink_startofpacket,
     input                       sink_endofpacket,
     output                      sink_ready,
@@ -102,7 +102,7 @@ module nios2system_mm_interconnect_0_router_002
     // Command Source (Output)
     // -------------------
     output                          src_valid,
-    output reg [69-1    : 0] src_data,
+    output reg [70-1    : 0] src_data,
     output reg [16-1 : 0] src_channel,
     output                          src_startofpacket,
     output                          src_endofpacket,
@@ -112,18 +112,18 @@ module nios2system_mm_interconnect_0_router_002
     // -------------------------------------------------------
     // Local parameters and variables
     // -------------------------------------------------------
-    localparam PKT_ADDR_H = 26;
+    localparam PKT_ADDR_H = 27;
     localparam PKT_ADDR_L = 9;
-    localparam PKT_DEST_ID_H = 55;
-    localparam PKT_DEST_ID_L = 52;
-    localparam PKT_PROTECTION_H = 59;
-    localparam PKT_PROTECTION_L = 57;
-    localparam ST_DATA_W = 69;
+    localparam PKT_DEST_ID_H = 56;
+    localparam PKT_DEST_ID_L = 53;
+    localparam PKT_PROTECTION_H = 60;
+    localparam PKT_PROTECTION_L = 58;
+    localparam ST_DATA_W = 70;
     localparam ST_CHANNEL_W = 16;
     localparam DECODER_TYPE = 1;
 
-    localparam PKT_TRANS_WRITE = 29;
-    localparam PKT_TRANS_READ  = 30;
+    localparam PKT_TRANS_WRITE = 30;
+    localparam PKT_TRANS_READ  = 31;
 
     localparam PKT_ADDR_W = PKT_ADDR_H-PKT_ADDR_L + 1;
     localparam PKT_DEST_ID_W = PKT_DEST_ID_H-PKT_DEST_ID_L + 1;

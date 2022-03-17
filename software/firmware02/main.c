@@ -11,14 +11,16 @@
 #include "altera_avalon_jtag_uart.h"
 #include "io.h"
 
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <fcntl.h>
 
 #include "utils.h"
 
-#define END_RECIEVE '\n'
+#define END_RECIEVE '$'
 #define HEX_DELAY 40
 #define FIR_FILTER_COEFF_NUM 25
 
@@ -137,92 +139,6 @@ void update_leds(){
 	}
 }
 
-void uart_recieve(unsigned char* buffer){
-	FILE* fp;
-	int i = 0;
-	char c = 0;
-	fp = fopen("/dev/jtag_uart", "r");
-	if(fp){
-		while(c != END_RECIEVE){
-			c = getc(fp);
-			buffer[i] = c;
-			i++;
-		}
-		buffer[i] = '\0';
-		fclose(fp);
-		// alt_printf("[DEBUG] CLOSED FP\n");
-	}
-}
-
-void state_0_recieve_loop(){
-	// while(state == 0){
-	char buff[256];
-	uart_recieve(buff);
-	// unsigned char c = decode_7seg(buff[0]);
-	// IOWR_ALTERA_AVALON_PIO_DATA(HEX0_BASE, &c);
-	
-	// write hex
-	char* c = buff;
-	int wordind = 0;
-	while(*c != ','){
-		wordind++;
-	}
-	memcpy(word, buff, wordind);
-	word[wordind] = '\0';
-	alt_printf("%s\n", word);
-	setBuffer(word, display_buff);
-	c++; // go over comma
-
-	// write leds
-	int ledind = 0;
-	while(*c != '\0'){
-		if(*c == '1')
-			leds |= 1 << (9-ledind);
-		ledind++;
-		c++;
-	}
-	write_leds(leds);
-	state = 1;
-
-		// if(buff[0] == 'h'){
-		// 	int len = strlen(buff) - 1;
-		// 	memcpy(word, buff+1, len);
-		// 	setBuffer(word, display_buff);
-		// 	// state = 1;
-		// }
-
-		// // write leds
-		// else if (buff[0] == 'l'){
-
-		// }
-
-		// // exit
-		// else if (buff[0] == 'e'){
-		// 	state = 1;
-		// }
-
-	// }
-}
-
-
-//#define OFFSET -32
-//#define PWM_PERIOD 16
-
-//alt_8 pwm = 0;
-//alt_u8 led;
-//int level;
-//
-//void led_write(alt_u8 led_pattern) {
-//    IOWR(LED_BASE, 0, led_pattern);
-//}
-//
-//void convert_read(alt_32 acc_read, int * level, alt_u8 * led) {
-//    acc_read += OFFSET;
-//    alt_u8 val = (acc_read >> 6) & 0x07;
-//    * led = (8 >> val) | (8 << (8 - val));
-//    * level = (acc_read >> 1) & 0x1f;
-//}
-
 void get_accler_isr() {
 	// reset timer
 	IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER0_BASE, 0);
@@ -249,6 +165,8 @@ void timer_init(void *isr) {
 
 int main() {
 
+	fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
+
 	// make fixed point filter coeff.
 	generate_fixed();
 
@@ -263,108 +181,79 @@ int main() {
     	alt_printf("[ERROR] NO TIMESTAMP TIMER\n");
     }
 
-	char buffer[256];
-	uart_recieve(buffer);
-	// alt_printf("%s\n", buffer);
+	char message[1024];
 
-	int i = 0;
-	while(buffer[i] != ',') i++;
+	char messagebuff[1024];
+	int messagebuffind = 0;
 
-	memcpy(word, buffer, i);
-	word[i] = '\0';
+	int message_is_ready = 0;
 
-	i++; // skip ','
-	int ledind = 0;
-	while(buffer[i] != '\0'){
-		if(buffer[i] == '1')
-			leds |= 1 << (9-ledind);
-		ledind++;
-		i++;
-	}
-	leds &= 0x3FF; // 10 leds mask
-	write_leds(leds);
+	char stdin_buff[256];
 
+	int size;
+	while(1) {
+		// clear
+		memset(stdin_buff, 0, 256);
+		size = read(STDIN_FILENO, stdin_buff, 256);
 
-	// alt_printf("%s\n", word);
-	setBuffer(word, display_buff);
+		if(size != -1){	
+			for(int i = 0; i < size; i++){
+				// non-terminating character
+				if(stdin_buff[i] != END_RECIEVE){
+					messagebuff[messagebuffind] = stdin_buff[i];
+					messagebuffind++;
+				}
+				// character is terminating
+				else {
+					memcpy(message, messagebuff, messagebuffind);
+					message[messagebuffind] = '\0';
+					message_is_ready = 1;
 
+					// reset message buffer
+					messagebuffind = 0;
+					memset(messagebuff, 0, 256);
+				}
+			}
+		}
+		
+		// [DEBUG] print message
+		if(message_is_ready){
+			if(message[0] == '1'){
+				leds = 0b1111111111;
+			} else if(message[0] == '0') {
+				leds = 0b0000000000;
+			} else {
+				memcpy(word, message, 25);
+				setBuffer(word, display_buff);
+			}
+			message_is_ready = 0;
+		}
 
-	// infinite polling loop
-    while (1) {
+		// only output if there is new sample
+		if(coord_data_ready){
 
-    	// only output if there is new sample
-    	if(coord_data_ready){
+			// accelerometer input
+			fir_filter_fixed(fir_mem_fixed_x, coords[0], filtered_coords);
+			fir_filter_fixed(fir_mem_fixed_y, coords[1], filtered_coords+1);
+			fir_filter_fixed(fir_mem_fixed_z, coords[2], filtered_coords+2);
 
-    		// accelerometer input
-    		fir_filter_fixed(fir_mem_fixed_x, coords[0], filtered_coords);
-    		fir_filter_fixed(fir_mem_fixed_y, coords[1], filtered_coords+1);
-    		fir_filter_fixed(fir_mem_fixed_z, coords[2], filtered_coords+2);
-
-    		// button & switch input
+			// button & switch input
 			buttons = read_buttons();
 			switches = read_switches();
 
-    		alt_printf("%x,%x,%x,%x,%x\n", \
-    				filtered_coords[0], filtered_coords[1], filtered_coords[2], \
-					buttons, switches);
-    		fflush(stdout);
+			alt_printf("%x,%x,%x,%x,%x\n",
+					filtered_coords[0], filtered_coords[1], filtered_coords[2],
+						buttons, switches);
+			fflush(stdout);
 
 			update_hex();
 			update_leds();
 
-    		coord_data_ready = 0;
-    	}
+			coord_data_ready = 0;
+		}
 
-		
-		// update Window
-//		char debug_display[41];
-//		char debug_window[7];
-//		memcpy(debug_display, display_buff, 40);
-//		memcpy(debug_window, window, 6);
-//		debug_display[40] = '\0';
-//		debug_window[6] = '\0';
+	}
 
-//		alt_printf("%s\n", debug_display);
-//		alt_printf("%s\n", debug_window);
-
-//		if(delay == 0){
-//			getWindow(window, display_buff);
-//			for(int j = 0; j < 6; j++){
-//				window[j] = decode_7seg(window[j]);
-//			}
-//			write_hex(window);
-//			shiftBuffer(display_buff);
-//			delay = 10;
-//		}
-//		delay--;
-//
-//		// state
-//		getState();
-//		alt_printf("State: %c\n", state);
-
-//		if(bool){
-//			write_leds(0b1111111111);
-//		} else {
-//			write_leds(0b0000000000);
-//		}
-
-    	// write_leds(leds);
-    }
-
-    // averaging time
-//    int totaltime = 0;
-//    for(int i = 0; i < 1000; i++){
-//    	totaltime += times[i];
-//    }
-//
-//    int totaltime_S = totaltime / 50000000;
-//    int totaltime_uS = totaltime / 50;
-//    int averagetime_uS = totaltime / (50*1000);
-//    int averagetime_nS = totaltime / (50);
-//
-//    alt_printf("\n\nTotal Running Time (HEX): 0x%x uS\n", totaltime_uS);
-//    alt_printf("Average Time (HEX): 0x%x uS\n", averagetime_uS);
-//    alt_printf("Sampling Rate (HEX): 0x%x Hz\n", 1000000/averagetime_uS);
 
     return 0;
 }

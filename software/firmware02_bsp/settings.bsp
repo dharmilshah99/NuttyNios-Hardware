@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Mar 15, 2022 4:48:14 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1647362894015</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Mar 17, 2022 2:31:16 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1647527476157</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>/home/dereklai/Desktop/NuttyNios-Hardware/software/firmware02_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>../../nios2system.sopcinfo</SopcDesignFile>
@@ -900,91 +900,91 @@
         </Setting>
         <MemoryMap>
                 <slaveDescriptor>onchip_memory</slaveDescriptor>
-                <addressRange>0x00010000 - 0x0001FFFF</addressRange>
-                <addressSpan>65536</addressSpan>
+                <addressRange>0x00020000 - 0x00035F8F</addressRange>
+                <addressSpan>90000</addressSpan>
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>timer1</slaveDescriptor>
-                <addressRange>0x00021000 - 0x0002101F</addressRange>
+                <addressRange>0x00041000 - 0x0004101F</addressRange>
                 <addressSpan>32</addressSpan>
                 <attributes>timer</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>timer0</slaveDescriptor>
-                <addressRange>0x00021020 - 0x0002103F</addressRange>
+                <addressRange>0x00041020 - 0x0004103F</addressRange>
                 <addressSpan>32</addressSpan>
                 <attributes>timer</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>button</slaveDescriptor>
-                <addressRange>0x00021040 - 0x0002104F</addressRange>
+                <addressRange>0x00041040 - 0x0004104F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>hex5</slaveDescriptor>
-                <addressRange>0x00021050 - 0x0002105F</addressRange>
+                <addressRange>0x00041050 - 0x0004105F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>hex4</slaveDescriptor>
-                <addressRange>0x00021060 - 0x0002106F</addressRange>
+                <addressRange>0x00041060 - 0x0004106F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>hex3</slaveDescriptor>
-                <addressRange>0x00021070 - 0x0002107F</addressRange>
+                <addressRange>0x00041070 - 0x0004107F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>hex2</slaveDescriptor>
-                <addressRange>0x00021080 - 0x0002108F</addressRange>
+                <addressRange>0x00041080 - 0x0004108F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>hex1</slaveDescriptor>
-                <addressRange>0x00021090 - 0x0002109F</addressRange>
+                <addressRange>0x00041090 - 0x0004109F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>hex0</slaveDescriptor>
-                <addressRange>0x000210A0 - 0x000210AF</addressRange>
+                <addressRange>0x000410A0 - 0x000410AF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>switch</slaveDescriptor>
-                <addressRange>0x000210B0 - 0x000210BF</addressRange>
+                <addressRange>0x000410B0 - 0x000410BF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>led</slaveDescriptor>
-                <addressRange>0x000210C0 - 0x000210CF</addressRange>
+                <addressRange>0x000410C0 - 0x000410CF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>sysid_qsys_0</slaveDescriptor>
-                <addressRange>0x000210D0 - 0x000210D7</addressRange>
+                <addressRange>0x000410D0 - 0x000410D7</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x000210D8 - 0x000210DF</addressRange>
+                <addressRange>0x000410D8 - 0x000410DF</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>accelerometer_spi</slaveDescriptor>
-                <addressRange>0x000210E0 - 0x000210E1</addressRange>
+                <addressRange>0x000410E0 - 0x000410E1</addressRange>
                 <addressSpan>2</addressSpan>
                 <attributes/>
         </MemoryMap>

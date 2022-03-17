@@ -209,7 +209,9 @@ wire             oci_hbreak_req;
 wire             reset_sync;
 reg              resetlatch /* synthesis ALTERA_ATTRIBUTE = "SUPPRESS_DA_RULE_INTERNAL=\"D101,R101\""  */;
 reg              resetrequest /* synthesis ALTERA_ATTRIBUTE = "SUPPRESS_DA_RULE_INTERNAL=\"D101,R101\""  */;
+wire             st_ready_test_idle_sync;
 wire             unxcomplemented_resetxx0;
+wire             unxcomplemented_resetxx1;
   assign unxcomplemented_resetxx0 = jrst_n;
   altera_std_synchronizer the_altera_std_synchronizer
     (
@@ -220,6 +222,17 @@ wire             unxcomplemented_resetxx0;
     );
 
   defparam the_altera_std_synchronizer.depth = 2;
+
+  assign unxcomplemented_resetxx1 = jrst_n;
+  altera_std_synchronizer the_altera_std_synchronizer1
+    (
+      .clk (clk),
+      .din (st_ready_test_idle),
+      .dout (st_ready_test_idle_sync),
+      .reset_n (unxcomplemented_resetxx1)
+    );
+
+  defparam the_altera_std_synchronizer1.depth = 2;
 
   always @(posedge clk or negedge jrst_n)
     begin
@@ -272,7 +285,7 @@ wire             unxcomplemented_resetxx0;
               monitor_error <= 1'b1;
           if (take_action_ocimem_a && jdo[23])
               monitor_go <= 1'b1;
-          else if (st_ready_test_idle)
+          else if (st_ready_test_idle_sync)
               monitor_go <= 1'b0;
         end
     end
@@ -617,7 +630,7 @@ module nios2system_cpu_cpu_nios2_oci_xbrk (
   output           xbrk_trigout;
   input            D_valid;
   input            E_valid;
-  input   [ 15: 0] F_pc;
+  input   [ 16: 0] F_pc;
   input            clk;
   input            reset_n;
   input            trigger_state_0;
@@ -635,7 +648,7 @@ reg              E_xbrk_goto1;
 reg              E_xbrk_traceoff;
 reg              E_xbrk_traceon;
 reg              E_xbrk_trigout;
-wire    [ 17: 0] cpu_i_address;
+wire    [ 18: 0] cpu_i_address;
 wire             xbrk0_armed;
 wire             xbrk0_break_hit;
 wire             xbrk0_goto0_hit;
@@ -821,7 +834,7 @@ module nios2system_cpu_cpu_nios2_oci_dbrk (
                                           )
 ;
 
-  output  [ 17: 0] cpu_d_address;
+  output  [ 18: 0] cpu_d_address;
   output           cpu_d_read;
   output  [ 31: 0] cpu_d_readdata;
   output           cpu_d_wait;
@@ -837,7 +850,7 @@ module nios2system_cpu_cpu_nios2_oci_dbrk (
   input   [ 31: 0] E_st_data;
   input   [ 31: 0] av_ld_data_aligned_filtered;
   input            clk;
-  input   [ 17: 0] d_address;
+  input   [ 18: 0] d_address;
   input            d_read;
   input            d_waitrequest;
   input            d_write;
@@ -845,7 +858,7 @@ module nios2system_cpu_cpu_nios2_oci_dbrk (
   input            reset_n;
 
 
-wire    [ 17: 0] cpu_d_address;
+wire    [ 18: 0] cpu_d_address;
 wire             cpu_d_read;
 wire    [ 31: 0] cpu_d_readdata;
 wire             cpu_d_wait;
@@ -1201,7 +1214,7 @@ module nios2system_cpu_cpu_nios2_oci_dtrace (
   output  [ 35: 0] atm;
   output  [ 35: 0] dtm;
   input            clk;
-  input   [ 17: 0] cpu_d_address;
+  input   [ 18: 0] cpu_d_address;
   input            cpu_d_read;
   input   [ 31: 0] cpu_d_readdata;
   input            cpu_d_wait;
@@ -2338,12 +2351,12 @@ defparam nios2system_cpu_cpu_ociram_sp_ram.lpm_file = "nios2system_cpu_cpu_ocira
 defparam nios2system_cpu_cpu_ociram_sp_ram.lpm_file = "nios2system_cpu_cpu_ociram_default_contents.hex";
 `endif
 //synthesis translate_on
-  assign cfgrom_readdata = (MonAReg[4 : 2] == 3'd0)? 32'h00010020 :
-    (MonAReg[4 : 2] == 3'd1)? 32'h00001212 :
+  assign cfgrom_readdata = (MonAReg[4 : 2] == 3'd0)? 32'h00020020 :
+    (MonAReg[4 : 2] == 3'd1)? 32'h00001313 :
     (MonAReg[4 : 2] == 3'd2)? 32'h00040000 :
     (MonAReg[4 : 2] == 3'd3)? 32'h00000100 :
     (MonAReg[4 : 2] == 3'd4)? 32'h20000000 :
-    (MonAReg[4 : 2] == 3'd5)? 32'h00010000 :
+    (MonAReg[4 : 2] == 3'd5)? 32'h00020000 :
     (MonAReg[4 : 2] == 3'd6)? 32'h00000000 :
     32'h00000000;
 
@@ -2403,12 +2416,12 @@ module nios2system_cpu_cpu_nios2_oci (
   input            D_valid;
   input   [ 31: 0] E_st_data;
   input            E_valid;
-  input   [ 15: 0] F_pc;
+  input   [ 16: 0] F_pc;
   input   [  8: 0] address_nxt;
   input   [ 31: 0] av_ld_data_aligned_filtered;
   input   [  3: 0] byteenable_nxt;
   input            clk;
-  input   [ 17: 0] d_address;
+  input   [ 18: 0] d_address;
   input            d_read;
   input            d_waitrequest;
   input            d_write;
@@ -2427,7 +2440,7 @@ reg     [  8: 0] address;
 wire    [ 35: 0] atm;
 wire    [ 31: 0] break_readreg;
 reg     [  3: 0] byteenable;
-wire    [ 17: 0] cpu_d_address;
+wire    [ 18: 0] cpu_d_address;
 wire             cpu_d_read;
 wire    [ 31: 0] cpu_d_readdata;
 wire             cpu_d_wait;
@@ -2864,7 +2877,7 @@ module nios2system_cpu_cpu (
                            )
 ;
 
-  output  [ 17: 0] d_address;
+  output  [ 18: 0] d_address;
   output  [  3: 0] d_byteenable;
   output           d_read;
   output           d_write;
@@ -2874,7 +2887,7 @@ module nios2system_cpu_cpu (
   output           debug_mem_slave_waitrequest;
   output           debug_reset_request;
   output           dummy_ci_port;
-  output  [ 17: 0] i_address;
+  output  [ 18: 0] i_address;
   output           i_read;
   input            clk;
   input   [ 31: 0] d_readdata;
@@ -2959,7 +2972,7 @@ wire    [  4: 0] D_iw_imm5;
 wire    [  1: 0] D_iw_memsz;
 wire    [  5: 0] D_iw_op;
 wire    [  5: 0] D_iw_opx;
-wire    [ 15: 0] D_jmp_direct_target_waddr;
+wire    [ 16: 0] D_jmp_direct_target_waddr;
 wire    [  1: 0] D_logic_op;
 wire    [  1: 0] D_logic_op_raw;
 wire             D_mem16;
@@ -3110,7 +3123,7 @@ wire             E_ld_stall;
 wire    [ 31: 0] E_logic_result;
 wire             E_logic_result_is_0;
 wire             E_lt;
-wire    [ 17: 0] E_mem_baddr;
+wire    [ 18: 0] E_mem_baddr;
 wire    [  3: 0] E_mem_byte_en;
 reg              E_new_inst;
 wire             E_rf_ecc_recoverable_valid;
@@ -3301,15 +3314,15 @@ wire             F_op_wrprs;
 wire             F_op_xor;
 wire             F_op_xorhi;
 wire             F_op_xori;
-reg     [ 15: 0] F_pc /* synthesis ALTERA_IP_DEBUG_VISIBLE = 1 */;
+reg     [ 16: 0] F_pc /* synthesis ALTERA_IP_DEBUG_VISIBLE = 1 */;
 wire             F_pc_en;
-wire    [ 15: 0] F_pc_no_crst_nxt;
-wire    [ 15: 0] F_pc_nxt;
-wire    [ 15: 0] F_pc_plus_one;
+wire    [ 16: 0] F_pc_no_crst_nxt;
+wire    [ 16: 0] F_pc_nxt;
+wire    [ 16: 0] F_pc_plus_one;
 wire    [  1: 0] F_pc_sel_nxt;
-wire    [ 17: 0] F_pcb;
-wire    [ 17: 0] F_pcb_nxt;
-wire    [ 17: 0] F_pcb_plus_four;
+wire    [ 18: 0] F_pcb;
+wire    [ 18: 0] F_pcb_nxt;
+wire    [ 18: 0] F_pcb_plus_four;
 wire             F_valid;
 wire    [ 71: 0] F_vinst;
 reg     [  1: 0] R_compare_op;
@@ -3443,7 +3456,7 @@ reg     [ 31: 0] W_ienable_reg;
 wire    [ 31: 0] W_ienable_reg_nxt;
 reg     [ 31: 0] W_ipending_reg;
 wire    [ 31: 0] W_ipending_reg_nxt;
-wire    [ 17: 0] W_mem_baddr;
+wire    [ 18: 0] W_mem_baddr;
 reg              W_rf_ecc_recoverable_valid;
 reg              W_rf_ecc_unrecoverable_valid;
 wire             W_rf_ecc_valid_any;
@@ -3483,7 +3496,7 @@ wire             av_ld_rshift8;
 reg              av_ld_waiting_for_data;
 wire             av_ld_waiting_for_data_nxt;
 wire             av_sign_bit;
-wire    [ 17: 0] d_address;
+wire    [ 18: 0] d_address;
 reg     [  3: 0] d_byteenable;
 reg              d_read;
 wire             d_read_nxt;
@@ -3501,7 +3514,7 @@ reg              hbreak_enabled;
 reg              hbreak_pending;
 wire             hbreak_pending_nxt;
 wire             hbreak_req;
-wire    [ 17: 0] i_address;
+wire    [ 18: 0] i_address;
 reg              i_read;
 wire             i_read_nxt;
 wire    [ 31: 0] iactive;
@@ -3862,9 +3875,9 @@ reg              wait_for_one_post_bret_inst;
     (W_br_taken | R_ctrl_uncond_cti_non_br)   ? 2'b10 :
     2'b11;
 
-  assign F_pc_no_crst_nxt = (F_pc_sel_nxt == 2'b00)? 16392 :
-    (F_pc_sel_nxt == 2'b01)? 33288 :
-    (F_pc_sel_nxt == 2'b10)? E_arith_result[17 : 2] :
+  assign F_pc_no_crst_nxt = (F_pc_sel_nxt == 2'b00)? 32776 :
+    (F_pc_sel_nxt == 2'b01)? 66056 :
+    (F_pc_sel_nxt == 2'b10)? E_arith_result[18 : 2] :
     F_pc_plus_one;
 
   assign F_pc_nxt = F_pc_no_crst_nxt;
@@ -3874,7 +3887,7 @@ reg              wait_for_one_post_bret_inst;
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
-          F_pc <= 16384;
+          F_pc <= 32768;
       else if (F_pc_en)
           F_pc <= F_pc_nxt;
     end
@@ -4166,7 +4179,7 @@ defparam nios2system_cpu_cpu_register_bank_b.lpm_file = "nios2system_cpu_cpu_rf_
     E_arith_src1 - E_arith_src2 :
     E_arith_src1 + E_arith_src2;
 
-  assign E_mem_baddr = E_arith_result[17 : 0];
+  assign E_mem_baddr = E_arith_result[18 : 0];
   assign E_logic_result = (R_logic_op == 2'b00)? (~(E_src1 | E_src2)) :
     (R_logic_op == 2'b01)? (E_src1 & E_src2) :
     (R_logic_op == 2'b10)? (E_src1 | E_src2) :
@@ -4489,7 +4502,7 @@ defparam nios2system_cpu_cpu_register_bank_b.lpm_file = "nios2system_cpu_cpu_rf_
 
   assign W_wr_data = W_wr_data_non_zero;
   assign W_br_taken = R_ctrl_br_uncond | (R_ctrl_br & W_cmp_result);
-  assign W_mem_baddr = W_alu_result[17 : 0];
+  assign W_mem_baddr = W_alu_result[18 : 0];
   assign W_status_reg = W_status_reg_pie;
   assign E_wrctl_status = R_ctrl_wrctl_inst & 
     (D_iw_control_regnum == 5'd0);

@@ -1,4 +1,4 @@
-// (C) 2001-2018 Intel Corporation. All rights reserved.
+// (C) 2001-2021 Intel Corporation. All rights reserved.
 // Your use of Intel Corporation's design tools, logic functions and other 
 // software and tools, and its AMPP partner logic functions, and any output 
 // files from any of the foregoing (including device programming or simulation 
@@ -24,9 +24,9 @@
 // agreement for further details.
 
 
-// $Id: //acds/rel/18.0std/ip/merlin/altera_merlin_multiplexer/altera_merlin_multiplexer.sv.terp#1 $
+// $Id: //acds/rel/21.1std/ip/merlin/altera_merlin_multiplexer/altera_merlin_multiplexer.sv.terp#1 $
 // $Revision: #1 $
-// $Date: 2018/01/31 $
+// $Date: 2020/06/22 $
 // $Author: psgswbuild $
 
 // ------------------------------------------
@@ -43,8 +43,8 @@
 //   ARBITRATION_SHARES:  1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 //   ARBITRATION_SCHEME   "no-arb"
 //   PIPELINE_ARB:        0
-//   PKT_TRANS_LOCK:      58 (arbitration locking enabled)
-//   ST_DATA_W:           96
+//   PKT_TRANS_LOCK:      59 (arbitration locking enabled)
+//   ST_DATA_W:           97
 //   ST_CHANNEL_W:        16
 // ------------------------------------------
 
@@ -54,112 +54,112 @@ module nios2system_mm_interconnect_0_rsp_mux
     // Sinks
     // ----------------------
     input                       sink0_valid,
-    input [96-1   : 0]  sink0_data,
+    input [97-1   : 0]  sink0_data,
     input [16-1: 0]  sink0_channel,
     input                       sink0_startofpacket,
     input                       sink0_endofpacket,
     output                      sink0_ready,
 
     input                       sink1_valid,
-    input [96-1   : 0]  sink1_data,
+    input [97-1   : 0]  sink1_data,
     input [16-1: 0]  sink1_channel,
     input                       sink1_startofpacket,
     input                       sink1_endofpacket,
     output                      sink1_ready,
 
     input                       sink2_valid,
-    input [96-1   : 0]  sink2_data,
+    input [97-1   : 0]  sink2_data,
     input [16-1: 0]  sink2_channel,
     input                       sink2_startofpacket,
     input                       sink2_endofpacket,
     output                      sink2_ready,
 
     input                       sink3_valid,
-    input [96-1   : 0]  sink3_data,
+    input [97-1   : 0]  sink3_data,
     input [16-1: 0]  sink3_channel,
     input                       sink3_startofpacket,
     input                       sink3_endofpacket,
     output                      sink3_ready,
 
     input                       sink4_valid,
-    input [96-1   : 0]  sink4_data,
+    input [97-1   : 0]  sink4_data,
     input [16-1: 0]  sink4_channel,
     input                       sink4_startofpacket,
     input                       sink4_endofpacket,
     output                      sink4_ready,
 
     input                       sink5_valid,
-    input [96-1   : 0]  sink5_data,
+    input [97-1   : 0]  sink5_data,
     input [16-1: 0]  sink5_channel,
     input                       sink5_startofpacket,
     input                       sink5_endofpacket,
     output                      sink5_ready,
 
     input                       sink6_valid,
-    input [96-1   : 0]  sink6_data,
+    input [97-1   : 0]  sink6_data,
     input [16-1: 0]  sink6_channel,
     input                       sink6_startofpacket,
     input                       sink6_endofpacket,
     output                      sink6_ready,
 
     input                       sink7_valid,
-    input [96-1   : 0]  sink7_data,
+    input [97-1   : 0]  sink7_data,
     input [16-1: 0]  sink7_channel,
     input                       sink7_startofpacket,
     input                       sink7_endofpacket,
     output                      sink7_ready,
 
     input                       sink8_valid,
-    input [96-1   : 0]  sink8_data,
+    input [97-1   : 0]  sink8_data,
     input [16-1: 0]  sink8_channel,
     input                       sink8_startofpacket,
     input                       sink8_endofpacket,
     output                      sink8_ready,
 
     input                       sink9_valid,
-    input [96-1   : 0]  sink9_data,
+    input [97-1   : 0]  sink9_data,
     input [16-1: 0]  sink9_channel,
     input                       sink9_startofpacket,
     input                       sink9_endofpacket,
     output                      sink9_ready,
 
     input                       sink10_valid,
-    input [96-1   : 0]  sink10_data,
+    input [97-1   : 0]  sink10_data,
     input [16-1: 0]  sink10_channel,
     input                       sink10_startofpacket,
     input                       sink10_endofpacket,
     output                      sink10_ready,
 
     input                       sink11_valid,
-    input [96-1   : 0]  sink11_data,
+    input [97-1   : 0]  sink11_data,
     input [16-1: 0]  sink11_channel,
     input                       sink11_startofpacket,
     input                       sink11_endofpacket,
     output                      sink11_ready,
 
     input                       sink12_valid,
-    input [96-1   : 0]  sink12_data,
+    input [97-1   : 0]  sink12_data,
     input [16-1: 0]  sink12_channel,
     input                       sink12_startofpacket,
     input                       sink12_endofpacket,
     output                      sink12_ready,
 
     input                       sink13_valid,
-    input [96-1   : 0]  sink13_data,
+    input [97-1   : 0]  sink13_data,
     input [16-1: 0]  sink13_channel,
     input                       sink13_startofpacket,
     input                       sink13_endofpacket,
     output                      sink13_ready,
 
     input                       sink14_valid,
-    input [96-1   : 0]  sink14_data,
+    input [97-1   : 0]  sink14_data,
     input [16-1: 0]  sink14_channel,
     input                       sink14_startofpacket,
     input                       sink14_endofpacket,
     output                      sink14_ready,
 
     input                       sink15_valid,
-    input [96-1   : 0]  sink15_data,
+    input [97-1   : 0]  sink15_data,
     input [16-1: 0]  sink15_channel,
     input                       sink15_startofpacket,
     input                       sink15_endofpacket,
@@ -170,7 +170,7 @@ module nios2system_mm_interconnect_0_rsp_mux
     // Source
     // ----------------------
     output                      src_valid,
-    output [96-1    : 0] src_data,
+    output [97-1    : 0] src_data,
     output [16-1 : 0] src_channel,
     output                      src_startofpacket,
     output                      src_endofpacket,
@@ -182,13 +182,13 @@ module nios2system_mm_interconnect_0_rsp_mux
     input clk,
     input reset
 );
-    localparam PAYLOAD_W        = 96 + 16 + 2;
+    localparam PAYLOAD_W        = 97 + 16 + 2;
     localparam NUM_INPUTS       = 16;
     localparam SHARE_COUNTER_W  = 1;
     localparam PIPELINE_ARB     = 0;
-    localparam ST_DATA_W        = 96;
+    localparam ST_DATA_W        = 97;
     localparam ST_CHANNEL_W     = 16;
-    localparam PKT_TRANS_LOCK   = 58;
+    localparam PKT_TRANS_LOCK   = 59;
 
     // ------------------------------------------
     // Signals
@@ -245,22 +245,22 @@ module nios2system_mm_interconnect_0_rsp_mux
     // ------------------------------------------
     reg [NUM_INPUTS - 1 : 0] lock;
     always @* begin
-      lock[0] = sink0_data[58];
-      lock[1] = sink1_data[58];
-      lock[2] = sink2_data[58];
-      lock[3] = sink3_data[58];
-      lock[4] = sink4_data[58];
-      lock[5] = sink5_data[58];
-      lock[6] = sink6_data[58];
-      lock[7] = sink7_data[58];
-      lock[8] = sink8_data[58];
-      lock[9] = sink9_data[58];
-      lock[10] = sink10_data[58];
-      lock[11] = sink11_data[58];
-      lock[12] = sink12_data[58];
-      lock[13] = sink13_data[58];
-      lock[14] = sink14_data[58];
-      lock[15] = sink15_data[58];
+      lock[0] = sink0_data[59];
+      lock[1] = sink1_data[59];
+      lock[2] = sink2_data[59];
+      lock[3] = sink3_data[59];
+      lock[4] = sink4_data[59];
+      lock[5] = sink5_data[59];
+      lock[6] = sink6_data[59];
+      lock[7] = sink7_data[59];
+      lock[8] = sink8_data[59];
+      lock[9] = sink9_data[59];
+      lock[10] = sink10_data[59];
+      lock[11] = sink11_data[59];
+      lock[12] = sink12_data[59];
+      lock[13] = sink13_data[59];
+      lock[14] = sink14_data[59];
+      lock[15] = sink15_data[59];
     end
 
     assign last_cycle = src_valid & src_ready & src_endofpacket & ~(|(lock & grant));

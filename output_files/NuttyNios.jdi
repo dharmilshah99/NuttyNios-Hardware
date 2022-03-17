@@ -1,6 +1,6 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="48d6a068bf68417cfcff"/>
+    <hash md5_digest_80b="f990dd9523e2936a0f06"/>
   </project>
   <file_info>
     <file device="10M50DAF484C7G" path="NuttyNios.sof" usercode="0xFFFFFFFF"/>
@@ -139,7 +139,7 @@
   <sld_infos>
     <sld_info hpath="nios2system:u0" name="u0">
       <assignment_values>
-        <assignment_value text="QSYS_NAME nios2system HAS_SOPCINFO 1 GENERATION_ID 1647262130"/>
+        <assignment_value text="QSYS_NAME nios2system HAS_SOPCINFO 1 GENERATION_ID 1647527370"/>
       </assignment_values>
       <parameters/>
     </sld_info>

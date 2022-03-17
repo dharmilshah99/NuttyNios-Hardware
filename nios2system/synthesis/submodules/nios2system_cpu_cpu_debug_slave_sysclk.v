@@ -77,30 +77,30 @@ wire             take_no_action_break_a;
 wire             take_no_action_break_b;
 wire             take_no_action_break_c;
 wire             take_no_action_ocimem_a;
-wire             unxunused_resetxx3;
 wire             unxunused_resetxx4;
+wire             unxunused_resetxx5;
 reg              update_jdo_strobe /* synthesis ALTERA_ATTRIBUTE = "SUPPRESS_DA_RULE_INTERNAL=\"D101,D103\""  */;
-  assign unxunused_resetxx3 = 1'b1;
-  altera_std_synchronizer the_altera_std_synchronizer3
-    (
-      .clk (clk),
-      .din (vs_udr),
-      .dout (sync_udr),
-      .reset_n (unxunused_resetxx3)
-    );
-
-  defparam the_altera_std_synchronizer3.depth = 2;
-
   assign unxunused_resetxx4 = 1'b1;
   altera_std_synchronizer the_altera_std_synchronizer4
     (
       .clk (clk),
-      .din (vs_uir),
-      .dout (sync_uir),
+      .din (vs_udr),
+      .dout (sync_udr),
       .reset_n (unxunused_resetxx4)
     );
 
   defparam the_altera_std_synchronizer4.depth = 2;
+
+  assign unxunused_resetxx5 = 1'b1;
+  altera_std_synchronizer the_altera_std_synchronizer5
+    (
+      .clk (clk),
+      .din (vs_uir),
+      .dout (sync_uir),
+      .reset_n (unxunused_resetxx5)
+    );
+
+  defparam the_altera_std_synchronizer5.depth = 2;
 
   always @(posedge clk)
     begin

@@ -97,8 +97,8 @@ wire             monitor_ready_sync;
 reg     [ 37: 0] sr /* synthesis ALTERA_ATTRIBUTE = "SUPPRESS_DA_RULE_INTERNAL=\"D101,D103,R101\""  */;
 wire             st_ready_test_idle;
 wire             tdo;
-wire             unxcomplemented_resetxx1;
 wire             unxcomplemented_resetxx2;
+wire             unxcomplemented_resetxx3;
   always @(posedge tck)
     begin
       if (vs_cdr)
@@ -192,27 +192,27 @@ wire             unxcomplemented_resetxx2;
 
   assign tdo = sr[0];
   assign st_ready_test_idle = jtag_state_rti;
-  assign unxcomplemented_resetxx1 = jrst_n;
-  altera_std_synchronizer the_altera_std_synchronizer1
-    (
-      .clk (tck),
-      .din (debugack),
-      .dout (debugack_sync),
-      .reset_n (unxcomplemented_resetxx1)
-    );
-
-  defparam the_altera_std_synchronizer1.depth = 2;
-
   assign unxcomplemented_resetxx2 = jrst_n;
   altera_std_synchronizer the_altera_std_synchronizer2
     (
       .clk (tck),
-      .din (monitor_ready),
-      .dout (monitor_ready_sync),
+      .din (debugack),
+      .dout (debugack_sync),
       .reset_n (unxcomplemented_resetxx2)
     );
 
   defparam the_altera_std_synchronizer2.depth = 2;
+
+  assign unxcomplemented_resetxx3 = jrst_n;
+  altera_std_synchronizer the_altera_std_synchronizer3
+    (
+      .clk (tck),
+      .din (monitor_ready),
+      .dout (monitor_ready_sync),
+      .reset_n (unxcomplemented_resetxx3)
+    );
+
+  defparam the_altera_std_synchronizer3.depth = 2;
 
   always @(posedge tck or negedge jrst_n)
     begin

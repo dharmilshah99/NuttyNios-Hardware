@@ -1,11 +1,11 @@
-20:20:04 **** Incremental Build of configuration Nios II for project firmware02 ****
+16:31:05 **** Incremental Build of configuration Nios II for project firmware02 ****
 make all 
 Info: Building ../firmware02_bsp/
 make --no-print-directory -C ../firmware02_bsp/
 [BSP build complete]
 Info: Compiling main.c to obj/default/main.o
 nios2-elf-gcc -xc -MP -MMD -c -I../firmware02_bsp//HAL/inc -I../firmware02_bsp/ -I../firmware02_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o "obj/default/main.o" "main.c"
-In file included from main.c:19:
+In file included from main.c:21:
 utils.h: In function 'setBuffer':
 utils.h:87:30: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
    87 |  memcpy(buffer, word, strlen(word));
@@ -18,32 +18,14 @@ In file included from ../firmware02_bsp//drivers/inc/altera_avalon_timer.h:36,
 /home/dereklai/intelFPGA_lite/21.1/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/nios2-elf/include/string.h:41:17: note: expected 'const char *' but argument is of type 'unsigned char *'
    41 | size_t  strlen (const char *);
       |                 ^~~~~~~~~~~~
-main.c: In function 'state_0_recieve_loop':
-main.c:160:15: warning: pointer targets in passing argument 1 of 'uart_recieve' differ in signedness [-Wpointer-sign]
-  160 |  uart_recieve(buff);
-      |               ^~~~
-      |               |
-      |               char *
-main.c:140:34: note: expected 'unsigned char *' but argument is of type 'char *'
-  140 | void uart_recieve(unsigned char* buffer){
-      |                   ~~~~~~~~~~~~~~~^~~~~~
-main.c: In function 'main':
-main.c:267:15: warning: pointer targets in passing argument 1 of 'uart_recieve' differ in signedness [-Wpointer-sign]
-  267 |  uart_recieve(buffer);
-      |               ^~~~~~
-      |               |
-      |               char *
-main.c:140:34: note: expected 'unsigned char *' but argument is of type 'char *'
-  140 | void uart_recieve(unsigned char* buffer){
-      |                   ~~~~~~~~~~~~~~~^~~~~~
 Info: Linking firmware02.elf
 nios2-elf-g++  -T'../firmware02_bsp//linker.x' -msys-crt0='../firmware02_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../firmware02_bsp/   -Wl,-Map=firmware02.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o firmware02.elf obj/default/main.o -lm -msys-lib=m
-nios2-elf-insert firmware02.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --id 0 --sidp 0x210d0 --timestamp 1647262130 --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name nios2system --quartus_project_dir "/home/dereklai/Desktop/NuttyNios-Hardware" --jdi ../..//output_files/NuttyNios.jdi --sopcinfo /home/dereklai/Desktop/NuttyNios-Hardware/software/firmware02_bsp/../../nios2system.sopcinfo
-Info: (firmware02.elf) 35 KBytes program size (code + initialized data).
-Info:                  21 KBytes free for stack + heap.
+nios2-elf-insert firmware02.elf --thread_model hal --cpu_name cpu --qsys true --simulation_enabled false --id 0 --sidp 0x410d0 --timestamp 1647527370 --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name nios2system --quartus_project_dir "/home/dereklai/Desktop/NuttyNios-Hardware" --jdi ../..//output_files/NuttyNios.jdi --sopcinfo /home/dereklai/Desktop/NuttyNios-Hardware/software/firmware02_bsp/../../nios2system.sopcinfo
+Info: (firmware02.elf) 33 KBytes program size (code + initialized data).
+Info:                  48 KBytes free for stack + heap.
 Info: Creating firmware02.objdump
 nios2-elf-objdump --disassemble --syms --all-header --source firmware02.elf >firmware02.objdump
 [firmware02 build complete]
 
-20:20:05 Build Finished (took 715ms)
+16:31:06 Build Finished (took 728ms)
 

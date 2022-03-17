@@ -194,7 +194,7 @@ ACDS_VERSION := 21.1
 SIM_OPTIMIZE ?= 0
 
 # The CPU reset address as needed by elf2flash
-RESET_ADDRESS ?= 0x00010000
+RESET_ADDRESS ?= 0x00020000
 
 # The specific Nios II ELF file format to use.
 NIOS2_ELF_FORMAT ?= elf32-littlenios2
@@ -213,9 +213,9 @@ DAT_FILES += $(HDL_SIM_DIR)/$(MEM_0).dat
 HDL_SIM_INSTALL_FILES += $(HDL_SIM_INSTALL_DIR)/$(MEM_0).dat
 SYM_FILES += $(HDL_SIM_DIR)/$(MEM_0).sym
 HDL_SIM_INSTALL_FILES += $(HDL_SIM_INSTALL_DIR)/$(MEM_0).sym
-$(MEM_0)_START := 0x00010000
-$(MEM_0)_END := 0x0001ffff
-$(MEM_0)_SPAN := 0x00010000
+$(MEM_0)_START := 0x00020000
+$(MEM_0)_END := 0x00035f8f
+$(MEM_0)_SPAN := 0x00015f90
 $(MEM_0)_HIERARCHICAL_PATH := onchip_memory
 $(MEM_0)_WIDTH := 32
 $(MEM_0)_HEX_DATA_WIDTH := 32
