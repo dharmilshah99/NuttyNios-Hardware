@@ -76,6 +76,7 @@ const unsigned char seven_seg_digits_decode_gfedcba[75]= {
 unsigned char decode_7seg(unsigned char chr)
 { /* Implementation uses ASCII */
 	if (chr == ' ') return 0xFF;
+	if (chr == 255) return 0xFF;
     if (chr > (unsigned char)'z')
         return 0xFF;
 //    return ~seven_seg_digits_decode_abcdefg[chr - '0'];

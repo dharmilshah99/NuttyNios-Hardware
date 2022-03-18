@@ -31,6 +31,7 @@ int state = 0;
 int buttons, switches;
 unsigned int leds = 0;
 
+int stopscroll = 0;
 
 alt_32 coords[3]; // contains x, y, z data
 alt_32 filtered_coords[3]; // contains filtered data
@@ -266,32 +267,45 @@ int main() {
 			
 			// score
 			else if(message[0] == '~') {
-				memcpy(word, message+1, curr_message_size-1);
-				setBuffer(word, display_buff);
+				unsigned char score_unprocessed[6]; 
+				unsigned char score[6]; 
+				memset(score_unprocessed, 255, 6);
+				memcpy(score_unprocessed, message+1, curr_message_size-1);
+				for(int i = 0; i < 6; i++){
+					score[i] = decode_7seg(score_unprocessed[i]);
+				}
+				write_hex(score);
+				stopscroll = 1;
 			}
 			
 			// easy filter
 			else if(message[0] == '-'){
 				char str[25] = "Easy filter";
+				memset(word, 255, 25);
 				memcpy(word, str, 25);
 				setBuffer(word, display_buff);
 				filter = 0;
 				leds = 0b0000000000;
+				stopscroll = 0;
 			}
 
 			// hard filter
 			else if(message[0] == '+'){
 				char str[25] = "Hard filter";
+				memset(word, 255, 25);
 				memcpy(word, str, 25);
 				setBuffer(word, display_buff);
 				filter = 1;
 				leds = 0b1111111111;
+				stopscroll = 0;
 			}
 			
 			// any other string
 			else {
+				memset(word, 255, 25);
 				memcpy(word, message, 25);
 				setBuffer(word, display_buff);
+				stopscroll = 0;
 			}
 			message_is_ready = 0;
 		}
@@ -313,7 +327,10 @@ int main() {
 						buttons, switches);
 			fflush(stdout);
 
-			update_hex();
+			if(!stopscroll) {
+				update_hex();
+			}
+			
 			update_leds();
 
 			coord_data_ready = 0;
