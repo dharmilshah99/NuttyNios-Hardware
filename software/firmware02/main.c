@@ -276,6 +276,7 @@ int main() {
 				memcpy(word, str, 25);
 				setBuffer(word, display_buff);
 				filter = 0;
+				leds = 0b0000000000;
 			}
 
 			// hard filter
@@ -284,6 +285,7 @@ int main() {
 				memcpy(word, str, 25);
 				setBuffer(word, display_buff);
 				filter = 1;
+				leds = 0b1111111111;
 			}
 			
 			// any other string
