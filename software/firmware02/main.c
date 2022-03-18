@@ -127,18 +127,14 @@ float fixed23_to_float(alt_32 fixed){
 	return (float)fixed / (float)(1<<23);
 }
 
+
 void fir_filter_fixed(alt_32 memory[FIR_FILTER_COEFF_NUM], alt_32 data, alt_32 *average){
 	memory[0] = data;
-
-	alt_64 easy_val = 0;
 
 	alt_32 acc = 0;
 	for(int i = 0; i < FIR_FILTER_COEFF_NUM; i++){
 		if(filter == 0){ // easy
-			easy_val = easy_filter_coeff_fixed[i] * memory[i] * 2;
-			if(easy_val > (240 << 23)) easy_val = (240 << 23);
-			if(easy_val < (-240 << 23)) easy_val = (-240 << 23);
-			acc += (alt_32)easy_val;
+			acc += easy_filter_coeff_fixed[i] * memory[i];
 		} else { // hard mode
 			acc += hard_filter_coeff_fixed[i] * memory[i];
 		}
