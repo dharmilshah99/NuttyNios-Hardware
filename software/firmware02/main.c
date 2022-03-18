@@ -25,6 +25,7 @@
 #define FIR_FILTER_COEFF_NUM 25
 
 // GLOBALS
+int filter = 0; // 0 easy, 1 hard
 int state = 0;
 
 int buttons, switches;
@@ -48,35 +49,64 @@ unsigned char window[6];
 //alt_u32 times[1000];
 //int timeindex;
 
-float filter_coeff_float[FIR_FILTER_COEFF_NUM] = {
-		-0.007515373920286,
-		-0.010763509959807,
-		0.010049798773992,
-		0.001844805593684,
-		-0.019807844578279,
-		0.022797855207093,
-		0.004384990844024,
-		-0.046054135205711,
-		0.056124756815064,
-		0.006802030909455,
-		-0.136368003901848,
-		0.26923938202295,
-		0.674466495032901,
-		0.26923938202295,
-		-0.136368003901848,
-		0.006802030909455,
-		0.056124756815064,
-		-0.046054135205711,
-		0.004384990844024,
-		0.022797855207093,
-		-0.019807844578279,
-		0.001844805593684,
-		0.010049798773992,
-		-0.010763509959807,
-		-0.007515373920286
+float easy_filter_coeff_float[FIR_FILTER_COEFF_NUM] = {
+	-0.007515373920286,
+	-0.010763509959807,
+	0.010049798773992,
+	0.001844805593684,
+	-0.019807844578279,
+	0.022797855207093,
+	0.004384990844024,
+	-0.046054135205711,
+	0.056124756815064,
+	0.006802030909455,
+	-0.136368003901848,
+	0.26923938202295,
+	0.674466495032901,
+	0.26923938202295,
+	-0.136368003901848,
+	0.006802030909455,
+	0.056124756815064,
+	-0.046054135205711,
+	0.004384990844024,
+	0.022797855207093,
+	-0.019807844578279,
+	0.001844805593684,
+	0.010049798773992,
+	-0.010763509959807,
+	-0.007515373920286
 };
 
-alt_u32 filter_coeff_fixed[FIR_FILTER_COEFF_NUM];
+float hard_filter_coeff_float[FIR_FILTER_COEFF_NUM] = {
+	-0.0004677231861,
+	-0.000173866359285,
+	0.000937990028395,
+	0.003858075231638,
+	0.009487846399465,
+	0.018528590955764,
+	0.031186479169928,
+	0.04693810067403,
+	0.064448245815707,
+	0.08170464084224,
+	0.096360238680506,
+	0.106209378953379,
+	0.109681990496945,
+	0.106209378953379,
+	0.096360238680506,
+	0.08170464084224,
+	0.064448245815707,
+	0.04693810067403,
+	0.031186479169928,
+	0.018528590955764,
+	0.009487846399465,
+	0.003858075231638,
+	0.000937990028395,
+	-0.173866359284789,
+	-0.467723186100422
+};
+
+alt_u32 easy_filter_coeff_fixed[FIR_FILTER_COEFF_NUM];
+alt_u32 hard_filter_coeff_fixed[FIR_FILTER_COEFF_NUM];
 
 alt_32 fir_mem_fixed_x[FIR_FILTER_COEFF_NUM] = {0};
 alt_32 fir_mem_fixed_y[FIR_FILTER_COEFF_NUM] = {0};
@@ -100,9 +130,18 @@ float fixed23_to_float(alt_32 fixed){
 void fir_filter_fixed(alt_32 memory[FIR_FILTER_COEFF_NUM], alt_32 data, alt_32 *average){
 	memory[0] = data;
 
+	alt_64 easy_val = 0;
+
 	alt_32 acc = 0;
 	for(int i = 0; i < FIR_FILTER_COEFF_NUM; i++){
-		acc += filter_coeff_fixed[i] * memory[i];
+		if(filter == 0){ // easy
+			easy_val = easy_filter_coeff_fixed[i] * memory[i] * 2;
+			if(easy_val > (240 << 23)) easy_val = (240 << 23);
+			if(easy_val < (-240 << 23)) easy_val = (-240 << 23);
+			acc += (alt_32)easy_val;
+		} else { // hard mode
+			acc += hard_filter_coeff_fixed[i] * memory[i];
+		}
 	}
 	*average = acc;
 
@@ -113,7 +152,8 @@ void fir_filter_fixed(alt_32 memory[FIR_FILTER_COEFF_NUM], alt_32 data, alt_32 *
 
 void generate_fixed(){
 	for(int i = 0; i < FIR_FILTER_COEFF_NUM; i++){
-		filter_coeff_fixed[i] = float_to_fixed23(filter_coeff_float[i]);
+		easy_filter_coeff_fixed[i] = float_to_fixed23(easy_filter_coeff_float[i]);
+		hard_filter_coeff_fixed[i] = float_to_fixed23(hard_filter_coeff_float[i]);
 	}
 }
 
@@ -148,19 +188,15 @@ void get_accler_isr() {
 }
 
 
-
 void timer_init(void *isr) {
 	// timer0: 20000 ticks per sec, T = 50us.
-
     IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER0_BASE, 0x0003);
     IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER0_BASE, 0);
     IOWR_ALTERA_AVALON_TIMER_PERIODL(TIMER0_BASE, 0xC4F0); // ~1000Hz Sampling
     IOWR_ALTERA_AVALON_TIMER_PERIODH(TIMER0_BASE, 0x0000);
     alt_irq_register(TIMER0_IRQ, 0, isr);
     IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER0_BASE, 0x0007);
-
 }
-
 
 
 int main() {
@@ -187,6 +223,7 @@ int main() {
 	int messagebuffind = 0;
 
 	int message_is_ready = 0;
+	int curr_message_size;
 
 	char stdin_buff[256];
 
@@ -208,6 +245,7 @@ int main() {
 					memcpy(message, messagebuff, messagebuffind);
 					message[messagebuffind] = '\0';
 					message_is_ready = 1;
+					curr_message_size = messagebuffind;
 
 					// reset message buffer
 					messagebuffind = 0;
@@ -216,13 +254,44 @@ int main() {
 			}
 		}
 		
-		// [DEBUG] print message
+
+		// handle input
 		if(message_is_ready){
+			
+			// led on
 			if(message[0] == '1'){
 				leds = 0b1111111111;
-			} else if(message[0] == '0') {
+			} 
+			
+			// led off
+			else if(message[0] == '0') {
 				leds = 0b0000000000;
-			} else {
+			} 
+			
+			// score
+			else if(message[0] == '~') {
+				memcpy(word, message+1, curr_message_size-1);
+				setBuffer(word, display_buff);
+			}
+			
+			// easy filter
+			else if(message[0] == '-'){
+				char str[25] = "Easy filter";
+				memcpy(word, str, 25);
+				setBuffer(word, display_buff);
+				filter = 0;
+			}
+
+			// hard filter
+			else if(message[0] == '+'){
+				char str[25] = "Hard filter";
+				memcpy(word, str, 25);
+				setBuffer(word, display_buff);
+				filter = 1;
+			}
+			
+			// any other string
+			else {
 				memcpy(word, message, 25);
 				setBuffer(word, display_buff);
 			}

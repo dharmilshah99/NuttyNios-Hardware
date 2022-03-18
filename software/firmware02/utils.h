@@ -84,7 +84,7 @@ unsigned char decode_7seg(unsigned char chr)
 
 void setBuffer(unsigned char* word, unsigned char buffer[25]){
 	memset(buffer, 255, 25);
-	memcpy(buffer, word, strlen(word));
+	memcpy(buffer, word, strlen((char*)word));
 }
 
 void shiftBuffer(unsigned char buffer[25]){
