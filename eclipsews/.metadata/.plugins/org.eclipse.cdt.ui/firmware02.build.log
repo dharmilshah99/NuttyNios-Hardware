@@ -1,0 +1,9 @@
+16:46:10 **** Incremental Build of configuration Nios II for project firmware02 ****
+make all 
+Info: Building ../firmware02_bsp/
+make --no-print-directory -C ../firmware02_bsp/
+[BSP build complete]
+[firmware02 build complete]
+
+16:46:10 Build Finished (took 458ms)
+

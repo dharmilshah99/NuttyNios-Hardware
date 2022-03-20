@@ -1,0 +1,48 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate C:\Users\meder\NuttyNios-Hardware\DE10_LITE_Qsys.qsys --block-symbol-file --output-directory=C:\Users\meder\NuttyNios-Hardware\DE10_LITE_Qsys --family="MAX 10" --part=10M50DAF484C6GES
+Progress: Loading NuttyNios-Hardware/DE10_LITE_Qsys.qsys
+Progress: Reading input file
+Progress: Adding accelerometer_spi [altera_up_avalon_accelerometer_spi 18.0]
+Progress: Parameterizing module accelerometer_spi
+Progress: Adding altpll_0 [altpll 18.0]
+Progress: Parameterizing module altpll_0
+Progress: Adding buttons [altera_avalon_pio 18.0]
+Progress: Parameterizing module buttons
+Progress: Adding clk_50 [clock_source 18.0]
+Progress: Parameterizing module clk_50
+Progress: Adding cpu [altera_nios2_gen2 18.0]
+Progress: Parameterizing module cpu
+Progress: Adding hex0 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex0
+Progress: Adding hex1 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex1
+Progress: Adding hex2 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex2
+Progress: Adding hex3 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex3
+Progress: Adding hex4 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex4
+Progress: Adding hex5 [altera_avalon_pio 18.0]
+Progress: Parameterizing module hex5
+Progress: Adding jtag_uart [altera_avalon_jtag_uart 18.0]
+Progress: Parameterizing module jtag_uart
+Progress: Adding led [altera_avalon_pio 18.0]
+Progress: Parameterizing module led
+Progress: Adding onchip_mem [altera_avalon_onchip_memory2 18.0]
+Progress: Parameterizing module onchip_mem
+Progress: Adding sdram [altera_avalon_new_sdram_controller 18.0]
+Progress: Parameterizing module sdram
+Progress: Adding switches [altera_avalon_pio 18.0]
+Progress: Parameterizing module switches
+Progress: Adding timer [altera_avalon_timer 18.0]
+Progress: Parameterizing module timer
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: DE10_LITE_Qsys.buttons: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: DE10_LITE_Qsys.jtag_uart: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
+Info: DE10_LITE_Qsys.sdram: SDRAM Controller will only be supported in Quartus Prime Standard Edition in the future release.
+Info: DE10_LITE_Qsys.switches: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: qsys-generate succeeded.
+Info: Stopping: Create block symbol file (.bsf)

@@ -1,0 +1,85 @@
+/*
+ * utils.h
+ *
+ *  Created on: Feb 19, 2022
+ *      Author: Derek Lai
+ */
+
+#include "system.h"
+#include "altera_up_avalon_accelerometer_spi.h"
+#include "altera_avalon_pio_regs.h"
+
+#ifndef UTILS_H_
+#define UTILS_H_
+
+void write_leds(int leds){
+	IOWR_ALTERA_AVALON_PIO_DATA(LED_BASE, leds);
+}
+
+void write_hex(unsigned char hex[6]) {
+	IOWR_ALTERA_AVALON_PIO_DATA(HEX0_BASE, hex[5]);
+	IOWR_ALTERA_AVALON_PIO_DATA(HEX1_BASE, hex[4]);
+	IOWR_ALTERA_AVALON_PIO_DATA(HEX2_BASE, hex[3]);
+	IOWR_ALTERA_AVALON_PIO_DATA(HEX3_BASE, hex[2]);
+	IOWR_ALTERA_AVALON_PIO_DATA(HEX4_BASE, hex[1]);
+	IOWR_ALTERA_AVALON_PIO_DATA(HEX5_BASE, hex[0]);
+}
+
+int read_switches() {
+	return IORD_ALTERA_AVALON_PIO_DATA(SWITCH_BASE);
+}
+
+int read_buttons() {
+	return IORD_ALTERA_AVALON_PIO_DATA(BUTTON_BASE);
+}
+
+void read_accerometer(alt_up_accelerometer_spi_dev *acc_dev, alt_32 coords[3]) {
+	alt_up_accelerometer_spi_read_x_axis(acc_dev, &coords[0]);
+	alt_up_accelerometer_spi_read_y_axis(acc_dev, &coords[1]);
+	alt_up_accelerometer_spi_read_z_axis(acc_dev, &coords[2]);
+}
+
+const unsigned char seven_seg_digits_decode_abcdefg[75]= {
+/*  0     1     2     3     4     5     6     7     8     9     :     ;     */
+    0x7E, 0x30, 0x6D, 0x79, 0x33, 0x5B, 0x5F, 0x70, 0x7F, 0x7B, 0x00, 0x00,
+/*  <     =     >     ?     @     A     B     C     D     E     F     G     */
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x77, 0x1F, 0x4E, 0x3D, 0x4F, 0x47, 0x5E,
+/*  H     I     J     K     L     M     N     O     P     Q     R     S     */
+    0x37, 0x06, 0x3C, 0x57, 0x0E, 0x55, 0x15, 0x1D, 0x67, 0x73, 0x05, 0x5B,
+/*  T     U     V     W     X     Y     Z     [     \     ]     ^     _     */
+    0x0F, 0x3E, 0x1C, 0x5C, 0x13, 0x3B, 0x6D, 0x00, 0x00, 0x00, 0x00, 0x00,
+/*  `     a     b     c     d     e     f     g     h     i     j     k     */
+    0x00, 0x77, 0x1F, 0x4E, 0x3D, 0x4F, 0x47, 0x5E, 0x37, 0x06, 0x3C, 0x57,
+/*  l     m     n     o     p     q     r     s     t     u     v     w     */
+    0x0E, 0x55, 0x15, 0x1D, 0x67, 0x73, 0x05, 0x5B, 0x0F, 0x3E, 0x1C, 0x5C,
+/*  x     y     z     */
+    0x13, 0x3B, 0x6D
+};
+
+const unsigned char seven_seg_digits_decode_gfedcba[75]= {
+/*  0     1     2     3     4     5     6     7     8     9     :     ;     */
+    0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x00, 0x00,
+/*  <     =     >     ?     @     A     B     C     D     E     F     G     */
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x3D,
+/*  H     I     J     K     L     M     N     O     P     Q     R     S     */
+    0x76, 0x30, 0x1E, 0x75, 0x38, 0x55, 0x54, 0x5C, 0x73, 0x67, 0x50, 0x6D,
+/*  T     U     V     W     X     Y     Z     [     \     ]     ^     _     */
+    0x78, 0x3E, 0x1C, 0x1D, 0x64, 0x6E, 0x5B, 0x00, 0x00, 0x00, 0x00, 0x00,
+/*  `     a     b     c     d     e     f     g     h     i     j     k     */
+    0x00, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71, 0x3D, 0x76, 0x30, 0x1E, 0x75,
+/*  l     m     n     o     p     q     r     s     t     u     v     w     */
+    0x38, 0x55, 0x54, 0x5C, 0x73, 0x67, 0x50, 0x6D, 0x78, 0x3E, 0x1C, 0x1D,
+/*  x     y     z     */
+    0x64, 0x6E, 0x5B
+};
+
+unsigned char decode_7seg(unsigned char chr)
+{ /* Implementation uses ASCII */
+    if (chr > (unsigned char)'z')
+        return 0x00;
+//    return ~seven_seg_digits_decode_abcdefg[chr - '0'];
+	return ~seven_seg_digits_decode_gfedcba[chr - '0'];
+}
+
+
+#endif /* UTILS_H_ */
